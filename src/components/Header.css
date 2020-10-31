@@ -1,0 +1,28 @@
+/* background-color: #282c34; */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--header);
+  font-size: calc(10px + 2vmin);
+  min-width: 100vw;
+}
+
+.column {
+  border: var(--border);
+  min-height: 5vh;
+  flex: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* FIXME: can not seem to get the text :vertical aligned. */
+.title {
+  color: var(--title-text);
+}
+
+.user-name {
+  font-size: 16px;
+  color: var(--text);
+  text-align: right;
+}
