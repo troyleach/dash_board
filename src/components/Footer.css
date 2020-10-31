@@ -1,11 +1,16 @@
-.header-container {
+.footer-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--header);
 }
 
-.header-container .column {
+.footer-container .column {
   border: var(--border);
   flex: 50%;
   padding-left: 10px;
@@ -17,13 +22,13 @@
   margin-block-end: 0.5em;
 }
 
-.title {
-  font-size: 20px;
+.left-text {
+  font-size: 10px;
   color: var(--title-text);
 }
 
-.user-name {
-  font-size: 16px;
+.copyright {
+  font-size: 10px;
   color: var(--text);
   text-align: right;
 }

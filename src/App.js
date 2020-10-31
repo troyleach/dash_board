@@ -1,6 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import TaskApp from './containers/TodoApp'
 
@@ -9,10 +10,11 @@ function App() {
     <div className="App">
       <Header
         title='Command Center'
-        userName='Troy'
+        userName='Troy Leach'
       />
 
-      <TaskApp />
+      {/* <TaskApp /> */}
+      <Footer />
     </div>
   );
 }

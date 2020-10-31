@@ -4,8 +4,12 @@ import "./Header.css";
 function Header(props) {
   return (
     <div className="header-container">
-      <span className="column title">{props.title}</span>
-      <span className="column user-name">{props.userName}</span>
+      <div className="column title">
+        <p>{props.title}</p>
+      </div>
+      <div className="column user-name">
+        <p>{props.userName}</p>
+      </div>
     </div>
   );
 }

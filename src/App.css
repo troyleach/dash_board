@@ -1,12 +1,12 @@
 :root {
   --red: #ff6f69;
   --header: #000;
-  --content-background-color: rgba(10.6, 11, 12.2, .75);
-  --cards-background-color: rgba(16.5, 16.5, 16.5, .75);
+  --content-background-color: #1b1c1f;
+  --cards-background-color: #2a2a2a;
   --yellow: #ffcc5c;
   --title-text: rgba(255, 255, 255, .75);
   --text: #fff;
-  --border: 1px solid red;
+  --border: 0px solid red;
 }
 
 *, *::before, *::after {
@@ -15,9 +15,14 @@
   font-weight: normal;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 0 25px;
   background: var(--content-background-color);
 }
 
