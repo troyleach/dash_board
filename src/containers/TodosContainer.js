@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./TodosContainer.css";
-import { getTodos, createTodo, deleteTodo } from '../services/api/todo'
+import { getTodos, createTodo, deleteTodo, completeTodo } from '../services/api/todo'
 import update from 'immutability-helper'
 
 class TodosContainer extends Component {
@@ -67,8 +67,26 @@ class TodosContainer extends Component {
     this.setState({ inputValue: e.target.value });
   }
 
+  async markComplete(event, id) {
+    const todoObject = {
+      completed: event.target.checked
+    }
+    try {
+      const result = await completeTodo(todoObject, id);
+      const todoIndex = this.state.todos.findIndex(todo => todo.id === id)
+      const todos = update(this.state.todos, {
+        [todoIndex]: { $set: result.data }
+      })
+      this.setState({
+        todos: todos
+      })
+    } catch (error) {
+      console.log('ERROR', error)
+      alert('something went wrong completing the todo', error);
+    }
+  }
+
   render() {
-    // console.log('data', this.state)
     return (
       <div>
         <div className="inputContainer">
@@ -82,7 +100,9 @@ class TodosContainer extends Component {
             {this.state.todos.map((todo) => {
               return (
                 <li className="task" todo={todo} key={todo.id}>
-                  <input className="taskCheckbox" type="checkbox" />
+                  <input className="taskCheckbox" type="checkbox"
+                    checked={todo.completed}
+                    onChange={(event) => this.markComplete(event, todo.id)} />
                   <label className="taskLabel">{todo.title}</label>
                   <span className="deleteTaskBtn"
                     onClick={(e) => this.removeTodo(todo.id)} >x</span>

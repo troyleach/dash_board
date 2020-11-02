@@ -9,7 +9,7 @@ ul.taskList {
 li.task {
 	list-style-type: none;
 	/* font-family: Tahoma; */
-	font-size: 0.5em;
+	font-size: 1em;
 	padding: 10px 0;
 	border-bottom: 1px solid #ccc;
 }
@@ -25,8 +25,8 @@ input.taskCheckbox {
 	float: left;
 	margin-right: 10px;
 	-webkit-appearance: none;
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	outline: none;
@@ -42,23 +42,23 @@ input.taskCheckbox:checked:after {
 	display: block;
 	font-size: 17px;
 	height: 17px;
-	/* position: absolute;
+	position: absolute;
 	width: 17px;
 	left: 0.5px;
-	bottom: 2px; */
+	bottom: 2px;
 }
 
 input.taskCheckbox + label.taskLabel {
-	color: black;
+	color: var(--text);
 }
 
 input.taskCheckbox:checked + label.taskLabel {
 	text-decoration: line-through;
-	color: #656565;
+	color: var(--second-text);
 }
 
 input[placeholder] {
-	font-size: 1em;
+	/* font-size: 1em; */
 }
 
 /* .container {
@@ -77,11 +77,11 @@ input[placeholder] {
 } */
 
 .inputContainer {
-	padding: 15px;
+	padding: 0;
 }
 
 .inputContainer .taskInput {
-	padding: 10px;
+	padding: 5px;
 	width: 100%;
 	border-radius: 25px;
 	box-sizing: border-box;

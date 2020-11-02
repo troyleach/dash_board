@@ -4,6 +4,11 @@
   margin: 15px;
 }
 
+.card-title {
+  font-size: 1em;
+  padding: 5px;
+}
+
 .outer-wrapper {
   display: grid;
   grid-gap: 10px;
@@ -19,17 +24,17 @@
 }
 
 .box {
-  background-color: var(--cards-background-color);
-  color: #fff;
+  /* This is for layout only - to view uncomment the background color See next box for what holds information*/
+  /* background-color: var(--cards-background-color); */
+  color: var(--text);
   border-radius: 5px;
   padding: 20px;
-  font-size: 150%;
 }
 
 .box .box {
   /* background-color: #ccc; */
-  background-color: #fff;
-  color: #444;
+  background-color: var(--cards-background-color);
+  color: var(--text);
 }
 
 
