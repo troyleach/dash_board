@@ -4,7 +4,6 @@ import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './containers/Home';
-import TaskApp from './containers/TodoApp'
 
 function App() {
   return (
