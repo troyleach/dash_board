@@ -1,0 +1,20 @@
+.time-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.time-date-box {
+  border-radius: 5px;
+}
+
+.time {
+  color: green;
+  font-size: small;
+}
+
+.date {
+  color: green;
+  font-size: small;
+  text-align: right;
+}

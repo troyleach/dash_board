@@ -3,6 +3,10 @@ import "./TodosContainer.css";
 import { getTodos, createTodo, deleteTodo, completeTodo } from '../services/api/todo'
 import update from 'immutability-helper'
 
+// fixme: the blog I followed
+// https://medium.com/@pamit/todo-list-building-a-react-app-with-rails-api-7a3027907665
+// do this next, redux
+// https://medium.com/@pamit/building-a-todo-app-using-react-redux-and-rails-fa260ebbdc44
 class TodosContainer extends Component {
   constructor(props) {
     super(props)

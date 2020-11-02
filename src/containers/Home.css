@@ -5,7 +5,7 @@
 }
 
 .card-title {
-  font-size: 1em;
+  font-size: small;
   padding: 5px;
 }
 
@@ -28,7 +28,7 @@
   /* background-color: var(--cards-background-color); */
   color: var(--text);
   border-radius: 5px;
-  padding: 20px;
+  padding: 5px;
 }
 
 .box .box {
@@ -58,19 +58,28 @@
   grid-row: 3;
 }
 
-.e {
+.time {
   grid-column: 1;
   grid-row: 1;
 }
 
-.f {
+.e {
   grid-column: 1;
   grid-row: 2;
+}
+
+.f {
+  grid-column: 1;
+  grid-row: 3;
 }
 
 .g {
   grid-column: 1;
   grid-row: 3;
+}
+
+.assign-date {
+  color: var(--dark-green-text);
 }
 
 /* todo lists */

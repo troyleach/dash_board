@@ -8,6 +8,8 @@
   --text: #fff;
   --second-text: #656565;
   --border: 0px solid red;
+  --light-green-text: #05B704;
+  --dark-green-text: green;
 }
 
 *, *::before, *::after {

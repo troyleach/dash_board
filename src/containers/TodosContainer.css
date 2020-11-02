@@ -37,7 +37,7 @@ input.taskCheckbox {
 }
 
 input.taskCheckbox:checked:after {
-	color: green;
+	color: var(--dark-green-text);
 	content: "\2713";
 	display: block;
 	font-size: 17px;
