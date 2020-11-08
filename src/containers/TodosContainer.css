@@ -9,7 +9,7 @@ ul.taskList {
 li.task {
 	list-style-type: none;
 	/* font-family: Tahoma; */
-	font-size: 1em;
+	font-size: 0.9em;
 	padding: 10px 0;
 	border-bottom: 1px solid #ccc;
 }

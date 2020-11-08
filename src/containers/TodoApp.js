@@ -1,3 +1,4 @@
+// FIXME: I think I can delete this file
 import React from 'react';
 
 // class Header extends React.Component {

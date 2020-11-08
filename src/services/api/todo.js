@@ -3,10 +3,13 @@ const BASE_URL = 'http://localhost:3000/api/v1/'
 const AUTH_HEADER = '';
 
 // TODO: write tests for the fail, like wrong url etc.
-export const getTodos = () => {
+export const getTodos = (params) => {
   return axios.get(
     `${BASE_URL}todos`,
     {
+      params: {
+        type: params
+      },
       headers: AUTH_HEADER
     }
   )
