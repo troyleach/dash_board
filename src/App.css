@@ -10,6 +10,7 @@
   --border: 0px solid red;
   --light-green-text: #05B704;
   --dark-green-text: green;
+  --underline-color: #656565;
 }
 
 *, *::before, *::after {

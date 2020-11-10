@@ -3,6 +3,8 @@ import "./TodosContainer.css";
 import { getTodos, createTodo, deleteTodo, completeTodo } from '../services/api/todo'
 import update from 'immutability-helper'
 
+import { getYesterdayDate, formateDate } from '../utils/dateHelpers';
+
 // fixme: the blog I followed
 // https://medium.com/@pamit/todo-list-building-a-react-app-with-rails-api-7a3027907665
 // do this next, redux
@@ -11,7 +13,7 @@ class TodosContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todos: [],
+      todos: [], // future I want to add just a plain ol todo list that is always on the dashboard not scrum
       todayTodos: [],
       yesterdayTodos: [],
       inputValue: ''
@@ -19,67 +21,31 @@ class TodosContainer extends Component {
     this.addTodo = this.addTodo.bind(this);
   }
 
-  getDateDisplayString(date) {
-    const now = new Date(); // in local time
-    const yesterday = new Date(now.setDate(now.getDate() - 1));
-    console.log('From here YESTERDAY', yesterday.toLocaleDateString())
-    const month = yesterday.getMonth() + 1;
-    const day = yesterday.getDate();
-    const year = yesterday.getFullYear();
-    return `${month}/${day}/${year}`;
-  }
-
   getTodaysTodos(todos) {
     const today = new Date(); // in local time
+    const todayFormatted = formateDate(today)
     for (const date in todos) {
-      const dateString = new Date(today).toLocaleDateString()
-      console.log('in the loop hasOwnProperty', dateString)
-      if (dateString === today.toLocaleDateString()) {
+      if (todayFormatted === date) {
         return todos[date];
       }
     }
+    return [];
   }
 
   getYesterdayTodos(todos) {
-    const now = new Date(); // in local time
-    const yesterday = new Date(now.setDate(now.getDate() - 1));
+    const yesterday = getYesterdayDate();
+    const yesterdayFormatted = formateDate(yesterday)
 
-    let testingThis = new Date('2020-11-06 03:34:36 UTC')
     for (const date in todos) {
-      const dateString = new Date(date).toLocaleDateString()
-      // console.log('in the loop hasOwnProperty', dateString)
-      console.log('what is this', dateString, yesterday.toLocaleDateString())
-      if (dateString === yesterday.toLocaleDateString()) {
+      if (date === yesterdayFormatted) {
         return todos[date];
       }
-      // if (todos.hasOwnProperty(date)) {
-      //   const element = todos[date];
-      //   console.log('in the loop ELEMENT', element)
-      // }
     }
-    // yesterday.toLocaleDateString();
-    // const yesterday = this.getDateDisplayString()
-    // const test = todos['2020-11-06 03:34:36 UTC']
-    const test = todos['2020-11-06 03:34:36 UTC']
-    const keys = Object.keys(todos);
-    // FIXME: I need to check and double check that this is a UTC date object coming from DB
-    // index 0 should be today and index 1 should be yesterday
-    // console.log('I should have two keys', keys)
-    // console.log('the date', new Date(keys[1]))
-    // console.log('from DB', new Date(keys[1]).toISOString())
-    return test;
   }
 
   async componentDidMount() {
-    console.log('this component DID mount')
     try {
-      // const today = new Date();
       const todos = await getTodos('group_by_assign_date');
-      // const { todos } = await getTodos().data; // can I do this??
-      // const tt = this.getYesterdayTodos(todos.data)
-      // console.log('tt', tt)
-      // now.setDate(now.getDate() -1);
-      console.log('before setting the state', this.getTodaysTodos(todos.data))
       this.setState({
         todayTodos: this.getTodaysTodos(todos.data),
         yesterdayTodos: this.getYesterdayTodos(todos.data),
@@ -115,6 +81,7 @@ class TodosContainer extends Component {
   }
 
   async removeTodo(id) {
+    // FIXME: this does not work yet | see markComplete below
     try {
       deleteTodo(id);
       const todoIndex = this.state.todos.findIndex(todo => todo.id === id)
@@ -134,45 +101,82 @@ class TodosContainer extends Component {
     this.setState({ inputValue: e.target.value });
   }
 
-  async markComplete(event, id) {
+  async markComplete(event, todo) {
+    let todosYesterday, todosToday;
+    const id = todo.id;
+    const { todayTodos, yesterdayTodos } = this.state
+    const yesterday = getYesterdayDate();
     const todoObject = {
       completed: event.target.checked
     }
     try {
       const result = await completeTodo(todoObject, id);
-      const todoIndex = this.state.todos.findIndex(todo => todo.id === id)
-      const todos = update(this.state.todos, {
-        [todoIndex]: { $set: result.data }
-      })
+      const assignDate = formateDate(new Date(todo.assign_date))
+
+      if (assignDate === yesterday) {
+        const todoIndex = yesterdayTodos.findIndex(todo => todo.id === id)
+
+        todosYesterday = update(yesterdayTodos, {
+          [todoIndex]: { $set: result.data }
+        })
+
+      } else {
+        const todoIndex = todayTodos.findIndex(todo => todo.id === id)
+
+        todosToday = update(todayTodos, {
+          [todoIndex]: { $set: result.data }
+        })
+
+      }
+
       this.setState({
-        todos: todos
+        todayTodos: todosToday,
+        yesterdayTodos: todosYesterday
       })
+
     } catch (error) {
       console.log('ERROR', error)
       alert('something went wrong completing the todo', error);
     }
   }
 
+  // todoItem(type) {
+  //   if (true) {
+  //     return <>
+  //       // {/* I added || false bc I was getting a controlled vs uncontrolled error in console */}
+  //       <input className="taskCheckbox" type="checkbox"
+  //         checked={todo.completed || false}
+  //         onChange={(event) => this.markComplete(event, todo)} />
+  //       <label className="taskLabel">{todo.title}</label>
+  //       <span className="deleteTaskBtn"
+  //         onClick={(e) => this.removeTodo(todo.id)} >x</span>
+  //     </>
+
+  //   }
+
+  // }
+
   render() {
     const { type } = this.props;
-    console.log('type', this.state[type])
-    console.log('type', type)
     return (
       <div>
         <div className="inputContainer">
-          <input className="taskInput" type="text"
-            placeholder="Add a task" maxLength="50"
-            onKeyPress={this.addTodo}
-            value={this.state.inputValue} onChange={this.handleChange} />
+          {type !== 'yesterdayTodos' &&
+            <input className="taskInput" type="text"
+              placeholder="Add a task" maxLength="50"
+              onKeyPress={this.addTodo}
+              value={this.state.inputValue} onChange={this.handleChange} />
+          }
         </div>
         <div className="listWrapper">
           <ul className="taskList">
             {this.state[type].map((todo) => {
               return (
                 <li className="task" todo={todo} key={todo.id}>
+                  {/* I added || false bc I was getting a controlled vs uncontrolled error in console */}
                   <input className="taskCheckbox" type="checkbox"
-                    checked={todo.completed}
-                    onChange={(event) => this.markComplete(event, todo.id)} />
+                    checked={todo.completed || false}
+                    onChange={(event) => this.markComplete(event, todo)} />
                   <label className="taskLabel">{todo.title}</label>
                   <span className="deleteTaskBtn"
                     onClick={(e) => this.removeTodo(todo.id)} >x</span>

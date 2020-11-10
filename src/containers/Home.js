@@ -2,22 +2,12 @@ import React from "react";
 import "./Home.css";
 import TodosContainer from './TodosContainer';
 import DisplayTime from '../components/Time';
-
-// FIXME: these need to move to helper file
-function getTomorrowsDate() {
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toLocaleDateString();
-}
-
-function getYesterdayDate() {
-  const now = new Date(); // in local time
-  const yesterday = new Date(now.setDate(now.getDate() - 1));
-  return yesterday.toLocaleDateString();
-}
+import { getYesterdayDate } from '../utils/dateHelpers';
 
 function Home(props) {
+  console.log('HOME DATE HERE', getYesterdayDate())
+  const yesterday = getYesterdayDate().toLocaleDateString()
+  const today = new Date().toLocaleDateString();
   return (
     <div className="home-container">
       <div className="outer-wrapper">
@@ -33,23 +23,21 @@ function Home(props) {
               <DisplayTime />
             </div>
             <div className="box e">
-              <div className="card-title">Yesterday <span className='assign-date'>{getYesterdayDate()}</span></div>
+              <div className="card-title">Yesterday <span className='assign-date'>{yesterday}</span></div>
               <TodosContainer
                 type='yesterdayTodos' />
             </div>
             <div className="box f">
-              <div className="card-title">Today <span className='assign-date'>{new Date().toLocaleDateString()}</span></div>
+              <div className="card-title">Today <span className='assign-date'>{today}</span></div>
               <TodosContainer
                 type='todayTodos' />
             </div>
           </div>
         </div>
-        <div className="box d">D</div>
+        <div className="box d">
+          <div className="card-title">Some cool thing here</div>
+        </div>
       </div>
-
-
-
-
     </div>
   );
 }
