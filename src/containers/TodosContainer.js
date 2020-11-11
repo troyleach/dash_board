@@ -52,7 +52,7 @@ class TodosContainer extends Component {
         todos: todos.data
       });
     } catch (error) {
-      // TODO: deal with erros
+      // TODO: deal with errors
       console.error('Error in getting todos', error);
     }
   }
@@ -80,16 +80,31 @@ class TodosContainer extends Component {
     }
   }
 
-  async removeTodo(id) {
-    // FIXME: this does not work yet | see markComplete below
+  async removeTodo(todo) {
+    const { todayTodos, yesterdayTodos } = this.state
+    let todosYesterday, todosToday;
+    const id = todo.id
+    let yesterday = getYesterdayDate();
+    yesterday = formateDate(yesterday);
+    const assignDate = formateDate(new Date(todo.assign_date))
+
     try {
-      deleteTodo(id);
-      const todoIndex = this.state.todos.findIndex(todo => todo.id === id)
-      const todos = update(this.state.todos, {
-        $splice: [[todoIndex, 1]]
-      })
+      await deleteTodo(id);
+      if (assignDate === yesterday) {
+        const todoIndex = yesterdayTodos.findIndex(todo => todo.id === id)
+        todosYesterday = update(yesterdayTodos, {
+          $splice: [[todoIndex, 1]]
+        })
+      } else {
+        const todoIndex = todayTodos.findIndex(todo => todo.id === id)
+        todosToday = update(this.state.todayTodos, {
+          $splice: [[todoIndex, 1]]
+        })
+
+      };
       this.setState({
-        todos: todos
+        todayTodos: todosToday,
+        yesterdayTodos: todosYesterday
       })
     } catch (error) {
       console.log('ERROR', error)
@@ -102,16 +117,18 @@ class TodosContainer extends Component {
   }
 
   async markComplete(event, todo) {
+    const { todayTodos, yesterdayTodos } = this.state
     let todosYesterday, todosToday;
     const id = todo.id;
-    const { todayTodos, yesterdayTodos } = this.state
-    const yesterday = getYesterdayDate();
+    let yesterday = getYesterdayDate();
     const todoObject = {
       completed: event.target.checked
     }
+
     try {
       const result = await completeTodo(todoObject, id);
       const assignDate = formateDate(new Date(todo.assign_date))
+      yesterday = formateDate(yesterday)
 
       if (assignDate === yesterday) {
         const todoIndex = yesterdayTodos.findIndex(todo => todo.id === id)
@@ -140,22 +157,6 @@ class TodosContainer extends Component {
     }
   }
 
-  // todoItem(type) {
-  //   if (true) {
-  //     return <>
-  //       // {/* I added || false bc I was getting a controlled vs uncontrolled error in console */}
-  //       <input className="taskCheckbox" type="checkbox"
-  //         checked={todo.completed || false}
-  //         onChange={(event) => this.markComplete(event, todo)} />
-  //       <label className="taskLabel">{todo.title}</label>
-  //       <span className="deleteTaskBtn"
-  //         onClick={(e) => this.removeTodo(todo.id)} >x</span>
-  //     </>
-
-  //   }
-
-  // }
-
   render() {
     const { type } = this.props;
     return (
@@ -179,7 +180,7 @@ class TodosContainer extends Component {
                     onChange={(event) => this.markComplete(event, todo)} />
                   <label className="taskLabel">{todo.title}</label>
                   <span className="deleteTaskBtn"
-                    onClick={(e) => this.removeTodo(todo.id)} >x</span>
+                    onClick={(e) => this.removeTodo(todo)} >x</span>
                 </li>
               )
             })}

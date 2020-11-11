@@ -5,7 +5,6 @@ import DisplayTime from '../components/Time';
 import { getYesterdayDate } from '../utils/dateHelpers';
 
 function Home(props) {
-  console.log('HOME DATE HERE', getYesterdayDate())
   const yesterday = getYesterdayDate().toLocaleDateString()
   const today = new Date().toLocaleDateString();
   return (

@@ -26,7 +26,7 @@ export const createTodo = (todo) => {
 }
 
 export const completeTodo = (todo, id) => {
-  console.log('mark complete', todo)
+  console.log(`Completed: ${todo.completed} todo.id => ${id}`)
   return axios.patch(
     `${BASE_URL}todos/${id}`,
     { todo: todo },
@@ -37,7 +37,7 @@ export const completeTodo = (todo, id) => {
 }
 
 export const deleteTodo = (id) => {
-  console.log('in the delete', id)
+  console.log(`Deleted todo.id => ${id}`)
   return axios.delete(
     `${BASE_URL}todos/${id}`,
     {
