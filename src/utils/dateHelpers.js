@@ -1,4 +1,6 @@
 // Everything dates live here
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
 *
@@ -32,3 +34,34 @@ export function getTomorrowsDate() {
 export function formateDate(date) {
   return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 }
+
+
+/**
+ *
+ * @params {Date} - start "2020-11-19T09:00:00-06:00"
+ * @params {Date} - end "2020-11-19T09:30:00-06:00"
+ * @return {String} - "09:00 AM - 09:30 AM"
+ *
+ */
+export function formateTime(start, end) {
+  const options = { hour: '2-digit', minute: '2-digit' };
+  return `${new Date(start).toLocaleTimeString([], options)} - 
+    ${new Date(end).toLocaleTimeString([], options)}`
+};
+
+/**
+ *
+ * Take care not to pass some random number in, it will produce a date and return
+ * the Day of week.
+ * @params {String} - "11-19-2020" || "2020-11-19" ||
+ * @params {Object} - 2020-11-19T09:30:00-06:00
+ * @return {String} - "Monday"
+ *
+ */
+export function getDayOfTheWeek(date) {
+  const workingDateIndex = new Date(date).getUTCDay();
+  if (isNaN(workingDateIndex))
+    throw new Error('You must provide a date string or date object');
+  const dayOfTheWeek = DAYS[workingDateIndex]
+  return dayOfTheWeek;
+};

@@ -47,8 +47,8 @@ class TodosContainer extends Component {
     try {
       const todos = await getTodos('group_by_assign_date');
       this.setState({
-        todayTodos: this.getTodaysTodos(todos.data),
-        yesterdayTodos: this.getYesterdayTodos(todos.data),
+        todayTodos: this.getTodaysTodos(todos.data) || [],
+        yesterdayTodos: this.getYesterdayTodos(todos.data) || [],
         todos: todos.data
       });
     } catch (error) {

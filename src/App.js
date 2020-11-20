@@ -16,8 +16,6 @@ function App() {
         userName='Troy Leach'
       />
       <Home />
-
-      {/* <TaskApp /> */}
       <Footer />
     </div>
   );

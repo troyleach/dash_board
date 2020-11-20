@@ -2,11 +2,14 @@ import React from "react";
 import "./Home.css";
 import TodosContainer from './TodosContainer';
 import DisplayTime from '../components/Time';
-import { getYesterdayDate } from '../utils/dateHelpers';
+import { getYesterdayDate, getTomorrowsDate } from '../utils/dateHelpers';
+import CalendarContainer from '../components/Calendar';
+
 
 function Home(props) {
   const yesterday = getYesterdayDate().toLocaleDateString()
   const today = new Date().toLocaleDateString();
+  const tomorrow = getTomorrowsDate();
   return (
     <div className="home-container">
       <div className="outer-wrapper">
@@ -14,7 +17,17 @@ function Home(props) {
           <div className="card-title">Box Scores</div>
         </div>
         <div className="box b">
-          <div className="card-title">Weather</div>
+          {/* <div className="card-title">Whats on tap for today</div> */}
+          <div className="inner-wrapper">
+            <div className="box event">
+              <CalendarContainer
+                day={today} />
+            </div>
+            <div className="box event">
+              <CalendarContainer
+                day={tomorrow} />
+            </div>
+          </div>
         </div>
         <div className="box c">
           <div className="inner-wrapper">
