@@ -24,7 +24,10 @@ class TodosContainer extends Component {
   getTodaysTodos(todos) {
     const today = new Date(); // in local time
     const todayFormatted = formateDate(today)
+    console.log('today', today)
+    console.log('todayFormatted', todayFormatted)
     for (const date in todos) {
+      console.log('date', date)
       if (todayFormatted === date) {
         return todos[date];
       }
