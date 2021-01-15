@@ -22,6 +22,7 @@ class TodosContainer extends Component {
   }
 
   getTodaysTodos(todos) {
+    console.log('todos', todos)
     const today = new Date(); // in local time
     const todayFormatted = formateDate(today)
     console.log('today', today)
