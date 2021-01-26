@@ -14,21 +14,18 @@ class TodosContainer extends Component {
     super(props)
     this.state = {
       todos: [], // future I want to add just a plain ol todo list that is always on the dashboard not scrum
-      todayTodos: [],
-      yesterdayTodos: [],
+      todayScrum: [],
+      yesterdayScrum: [],
       inputValue: ''
     }
     this.addTodo = this.addTodo.bind(this);
   }
 
+  // FIXME: change this name this is now getTodayScrum
   getTodaysTodos(todos) {
-    console.log('todos', todos)
     const today = new Date(); // in local time
     const todayFormatted = formateDate(today)
-    console.log('today', today)
-    console.log('todayFormatted', todayFormatted)
     for (const date in todos) {
-      console.log('date', date)
       if (todayFormatted === date) {
         return todos[date];
       }
@@ -36,6 +33,7 @@ class TodosContainer extends Component {
     return [];
   }
 
+  // FIXME: change this name this is now getYesterdayScrum
   getYesterdayTodos(todos) {
     const yesterday = getYesterdayDate();
     const yesterdayFormatted = formateDate(yesterday)
@@ -45,15 +43,20 @@ class TodosContainer extends Component {
         return todos[date];
       }
     }
-  }
+  };
 
   async componentDidMount() {
     try {
-      const todos = await getTodos('group_by_assign_date');
+      // TODO: I need to pass in the time zone blah... see api
+      // Intl.DateTimeFormat().resolvedOptions().timeZone
+      // this seems to get the right timezone (as long as the broswer is set up right)
+      // then I can pass that onto the API to get the correct todos back when the server time is tomorrow
+      // const todos = await getTodos('group_by_assign_date');
+      const scrumTodos = await getTodos('group_by_assign_date');
       this.setState({
-        todayTodos: this.getTodaysTodos(todos.data) || [],
-        yesterdayTodos: this.getYesterdayTodos(todos.data) || [],
-        todos: todos.data
+        todayScrum: this.getTodaysTodos(scrumTodos.data) || [],
+        yesterdayScrum: this.getYesterdayTodos(scrumTodos.data) || [],
+        todos: scrumTodos.data.todos || []
       });
     } catch (error) {
       // TODO: deal with errors
@@ -63,18 +66,32 @@ class TodosContainer extends Component {
 
   async addTodo(event) {
     if (event.key === 'Enter') {
-      console.log(event.target.value)
+      const type = event.target.name;
       const todoObject = {
-        title: event.target.value,
-        assign_date: new Date()
+        title: event.target.value
       }
+      console.log('ZZZ type', event.target.name)
+
+      if (type === 'todayScrum') {
+        todoObject.assign_date = new Date();
+      }
+
       try {
+        let todayScrumTask, todo;
         const result = await createTodo(todoObject)
-        const todos = update(this.state.todayTodos, {
-          $splice: [[0, 0, result.data]]
-        })
+        if (type === 'todayScrum') {
+          todayScrumTask = update(this.state.todayScrum, {
+            $splice: [[0, 0, result.data]]
+          });
+        } else {
+          todo = update(this.state.todos, {
+            $splice: [[0, 0, result.data]]
+          });
+        };
+
         this.setState({
-          todayTodos: todos,
+          todayScrum: todayScrumTask,
+          todos: todo,
           inputValue: ''
         })
       } catch (error) {
@@ -85,30 +102,37 @@ class TodosContainer extends Component {
   }
 
   async removeTodo(todo) {
-    const { todayTodos, yesterdayTodos } = this.state
-    let todosYesterday, todosToday;
+    const { todayScrum, yesterdayScrum, todos } = this.state
+    let scrumYesterday, scrumToday, todosTodo;
     const id = todo.id
     let yesterday = getYesterdayDate();
     yesterday = formateDate(yesterday);
+    let today = new Date(); // in local time
     const assignDate = formateDate(new Date(todo.assign_date))
 
     try {
       await deleteTodo(id);
+      today = formateDate(today)
       if (assignDate === yesterday) {
-        const todoIndex = yesterdayTodos.findIndex(todo => todo.id === id)
-        todosYesterday = update(yesterdayTodos, {
+        const todoIndex = yesterdayScrum.findIndex(todo => todo.id === id)
+        scrumYesterday = update(yesterdayScrum, {
+          $splice: [[todoIndex, 1]]
+        })
+      } else if (assignDate === today) {
+        const todoIndex = todayScrum.findIndex(todo => todo.id === id)
+        scrumToday = update(this.state.todayScrum, {
           $splice: [[todoIndex, 1]]
         })
       } else {
-        const todoIndex = todayTodos.findIndex(todo => todo.id === id)
-        todosToday = update(this.state.todayTodos, {
+        const todoIndex = todos.findIndex(todo => todo.id === id)
+        todosTodo = update(this.state.todos, {
           $splice: [[todoIndex, 1]]
         })
-
       };
       this.setState({
-        todayTodos: todosToday,
-        yesterdayTodos: todosYesterday
+        todayScrum: scrumToday,
+        yesterdayScrum: scrumYesterday,
+        todos: todosTodo
       })
     } catch (error) {
       console.log('ERROR', error)
@@ -121,10 +145,12 @@ class TodosContainer extends Component {
   }
 
   async markComplete(event, todo) {
-    const { todayTodos, yesterdayTodos } = this.state
-    let todosYesterday, todosToday;
+    const { todayScrum, yesterdayScrum, todos } = this.state
+    let scrumYesterday, scrumToday, todosTodo;
     const id = todo.id;
     let yesterday = getYesterdayDate();
+    let today = new Date(); // in local time
+
     const todoObject = {
       completed: event.target.checked
     }
@@ -133,26 +159,36 @@ class TodosContainer extends Component {
       const result = await completeTodo(todoObject, id);
       const assignDate = formateDate(new Date(todo.assign_date))
       yesterday = formateDate(yesterday)
+      today = formateDate(today)
+
 
       if (assignDate === yesterday) {
-        const todoIndex = yesterdayTodos.findIndex(todo => todo.id === id)
+        const todoIndex = yesterdayScrum.findIndex(todo => todo.id === id)
 
-        todosYesterday = update(yesterdayTodos, {
+        scrumYesterday = update(yesterdayScrum, {
+          [todoIndex]: { $set: result.data }
+        })
+
+      } else if (assignDate === today) {
+        const todoIndex = todayScrum.findIndex(todo => todo.id === id)
+
+        scrumToday = update(todayScrum, {
           [todoIndex]: { $set: result.data }
         })
 
       } else {
-        const todoIndex = todayTodos.findIndex(todo => todo.id === id)
+        const todoIndex = todos.findIndex(todo => todo.id === id)
 
-        todosToday = update(todayTodos, {
+        todosTodo = update(todos, {
           [todoIndex]: { $set: result.data }
         })
 
       }
 
       this.setState({
-        todayTodos: todosToday,
-        yesterdayTodos: todosYesterday
+        todayScrum: scrumToday,
+        yesterdayScrum: scrumYesterday,
+        todos: todosTodo
       })
 
     } catch (error) {
@@ -166,8 +202,11 @@ class TodosContainer extends Component {
     return (
       <div>
         <div className="inputContainer">
-          {type !== 'yesterdayTodos' &&
-            <input className="taskInput" type="text"
+          {type !== 'yesterdayScrum' &&
+            <input
+              name={type}
+              className="taskInput"
+              type="text"
               placeholder="Add a task" maxLength="50"
               onKeyPress={this.addTodo}
               value={this.state.inputValue} onChange={this.handleChange} />

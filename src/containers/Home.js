@@ -35,15 +35,20 @@ function Home(props) {
               <DisplayTime />
             </div>
             <div className="box e">
-              <div className="card-title">Yesterday <span className='assign-date'>{yesterday}</span></div>
+              <div className="card-title">Yesterday scrum <span className='assign-date'>{yesterday}</span></div>
               <TodosContainer
-                type='yesterdayTodos' />
+                type='yesterdayScrum' />
             </div>
             <div className="box f">
-              <div className="card-title">Today <span className='assign-date'>{today}</span></div>
+              <div className="card-title">Today scrum <span className='assign-date'>{today}</span></div>
               <TodosContainer
-                type='todayTodos' />
+                type='todayScrum' />
             </div>
+          </div>
+          <div className="box g">
+            <div className="card-title">Todos</div>
+            <TodosContainer
+              type='todos' />
           </div>
         </div>
         <div className="box d">
