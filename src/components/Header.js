@@ -1,5 +1,7 @@
 import React from "react";
+import Clock from './Clock';
 import "./Header.css";
+
 
 function Header(props) {
   return (
@@ -7,8 +9,15 @@ function Header(props) {
       <div className="column title">
         <p>{props.title}</p>
       </div>
-      <div className="column user-name">
-        <p>{props.userName}</p>
+
+      <div className="column open-column"></div>
+
+      <div className="column right-column">
+        <span>
+          <img className='colorado-flag' src='co-flag-icon.png' alt='Colorado Flag' />
+        </span>
+        <Clock />
+        <span className='user-name'>{props.userName}</span>
       </div>
     </div>
   );

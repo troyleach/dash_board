@@ -12,18 +12,43 @@
   padding-right: 10px;
 }
 
-.column p {
+/* .column p {
+  I don't think I use this 
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
-}
+} */
 
 .title {
   font-size: 20px;
   color: var(--title-text);
 }
 
+.right-column {
+  border: var(--border);
+  text-align: right;
+}
+
 .user-name {
+  border: var(--border);
   font-size: 16px;
   color: var(--text);
+  /* text-align: center; */
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.colorado-flag {
+  border: var(--border);
+  height: 2.1rem;
   text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-right: 0.5rem;
+}
+
+time {
+  color: green;
+  margin-right: 1.5rem;
 }

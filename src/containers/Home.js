@@ -21,11 +21,13 @@ function Home(props) {
           <div className="inner-wrapper">
             <div className="box event">
               <CalendarContainer
-                day={today} />
+                day={today}
+                when='today' />
             </div>
             <div className="box event">
               <CalendarContainer
-                day={tomorrow} />
+                day={tomorrow}
+                when='tomorrow' />
             </div>
           </div>
         </div>
