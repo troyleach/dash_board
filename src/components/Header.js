@@ -16,7 +16,7 @@ function Header(props) {
         <span>
           <img className='colorado-flag' src='co-flag-icon.png' alt='Colorado Flag' />
         </span>
-        {/* <Clock /> */}
+        <Clock />
         <span className='user-name'>{props.userName}</span>
       </div>
     </div>

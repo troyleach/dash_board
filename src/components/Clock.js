@@ -6,18 +6,19 @@ class Clock extends Component {
     super(props);
     // TODO: get timeZone from the users table once created
     this.state = {
-      time: new Date(),
+      locales: 'en-US',
       options: {
-        locales: 'en-US',
         timeZone: 'America/Denver'
       }
     }
   }
 
   currentTime() {
-    // d.toLocaleTimeString('en-US', {timeZone: 'America/Denver'})
+    const { options, locales } = this.state;
+    const date = new Date();
+    let time = date.toLocaleTimeString(locales, options)
     this.setState({
-      time: new Date()
+      time: time
     })
   }
 
@@ -26,11 +27,9 @@ class Clock extends Component {
   }
 
   render() {
-    const { options, time } = this.state;
+    const { time } = this.state;
     return (
-      <div className="time-container">
-        <div className='time-date-box time'>{time.toLocaleTimeString()}</div>
-      </div>
+      <span className='clock'>{time}</span>
     );
   }
 
