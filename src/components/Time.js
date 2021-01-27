@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import "./Time.css";
 
+// FIXME: this is more then 'time' fix this, this class
+// returns more then just time it also returns date formated
+// this is gross now I also can not use this in other places
+// like displaying the time in a different city. see header
 class DisplayTime extends Component {
   constructor(props) {
     super(props);

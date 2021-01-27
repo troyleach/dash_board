@@ -50,12 +50,12 @@ class CalendarContainer extends Component {
   };
 
   render() {
-    const { day } = this.props;
+    const { day, when } = this.props;
     const dayOfTheWeek = getDayOfTheWeek(day)
     return (
       <>
         <div className="calendar-Wrapper">
-          <div className="card-title">{`Whats on tap for ${dayOfTheWeek}`}</div>
+          <div className="card-title">{`Whats on tap for ${when} (${dayOfTheWeek})`}</div>
           <ul>
             {this.getEventsFor(day)}
           </ul>
@@ -66,3 +66,5 @@ class CalendarContainer extends Component {
 }
 
 export default CalendarContainer;
+// AIzaSyA4jZTZS-XjtYPp8SYDTaNMWNMH_ZeRKwU
+// https://maps.googleapis.com/maps/api/timezone/json?location=49.283436, -123.130429&timestamp=1478880000&key=AIzaSyA4jZTZS-XjtYPp8SYDTaNMWNMH_ZeRKwU
