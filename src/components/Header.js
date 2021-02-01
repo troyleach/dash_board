@@ -4,6 +4,7 @@ import Stock from './Stock';
 
 import "./Header.css";
 let STOCKS;
+const REACT_APP_STOCKS_FEATURE = process.env.REACT_APP_STOCKS_FEATURE;
 
 
 console.log('ENV YO', process.env.REACT_APP_ENV)
@@ -23,16 +24,18 @@ function Header(props) {
         <p>{props.title}</p>
       </div>
 
-      <div className="column stocks-container">
-        <ul>
-          {STOCKS.map(symbol => {
-            return <Stock
-              key={symbol}
-              sym={symbol} />
-          })}
+      {REACT_APP_STOCKS_FEATURE &&
+        <div className="column stocks-container">
+          <ul>
+            {STOCKS.map(symbol => {
+              return <Stock
+                key={symbol}
+                sym={symbol} />
+            })}
 
-        </ul>
-      </div>
+          </ul>
+        </div>
+      }
 
       <div className="column right-column">
         <span>

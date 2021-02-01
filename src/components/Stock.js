@@ -13,6 +13,7 @@ class Stock extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      lastRefreshDate: null,
       symbol: '',
       close: '',
       prevClose: '',
@@ -28,13 +29,20 @@ class Stock extends Component {
 
   // TODO: maybe this should be more like stock vitals or something
   stockUp(data) {
+    //FIXME: so what I think is happening is that the api i picked does
+    // not have hourly updates, it jus shows the last close date.
     // I feel like I could use the Last Refreshed date instead of this business.
+    // this is today
     const lastWeekDay = getLastWeekDay();
+    // formateDate(new Date())
     const weekDayDate = formateDate(lastWeekDay)
+
     console.log('the new date LASTWEEKDAY', weekDayDate);
 
-    const dayBefore = getDayBefore(lastWeekDay);
-    const dayBeforeDate = formateDate(dayBefore)
+    // const dayBefore = getDayBefore(lastWeekDay);
+    // const dayBeforeDate = formateDate(dayBefore)
+
+    const dayBeforeDate = this.state.lastRefreshDate;
     console.log('the new date DAYBEFORE', dayBeforeDate);
 
     const yesterdayStock = data[dayBeforeDate];
@@ -75,7 +83,8 @@ class Stock extends Component {
 
     if (stockData["Meta Data"]) {
       this.setState({
-        symbol: stockData["Meta Data"]["2. Symbol"]
+        symbol: stockData["Meta Data"]["2. Symbol"],
+        lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
       });
       console.log('STATE', this.state)
     }
@@ -124,11 +133,6 @@ class Stock extends Component {
               ? this.StockIsUp(this.state)
               : this.StockIsDown(this.state)
             }
-
-            {/* <TiArrowDownOutline
-            className='stock-arrow'
-            color='red' />
-          <span className='stock-symbol'>{symbol.toUpperCase()}</span> */}
           </span>
         </li>
       </>

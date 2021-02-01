@@ -105,4 +105,5 @@ export function getLastWeekDay() {
     const twoDaysAgo = today.setDate(today.getDate() - 1)
     return new Date(twoDaysAgo);
   }
+  return today;
 }; 
