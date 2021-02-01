@@ -6,8 +6,8 @@ import "./Header.css";
 let STOCKS;
 
 
-console.log('ENV YO', process.env.NODE_ENV)
-if (process.env.NODE_ENV === 'development') {
+console.log('ENV YO', process.env.REACT_APP_ENV)
+if (process.env.REACT_APP_ENV === 'dev') {
   STOCKS = ['jpm', 'jpm', 'jpm', 'jpm']
 } else {
   // can fit 4 stocks at one time

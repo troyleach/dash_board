@@ -57,8 +57,8 @@ class Stock extends Component {
 
   async componentDidMount() {
     let stockData;
-    console.log('ENV YO componentDidMount', process.env.NODE_ENV)
-    if (process.env.NODE_ENV === 'development') {
+    console.log('ENV YO componentDidMount', process.env.REACT_APP_ENV)
+    if (process.env.REACT_APP_ENV === 'dev') {
       stockData = fakeStockData;
     } else {
       const data = await getDayStocks(this.props.sym);
