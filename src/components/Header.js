@@ -1,6 +1,18 @@
 import React from "react";
 import Clock from './Clock';
+import Stock from './Stock';
+
 import "./Header.css";
+let STOCKS;
+
+
+if (process.env.NODE_ENV === 'development') {
+  STOCKS = ['jpm', 'jpm', 'jpm', 'jpm']
+} else {
+  // can fit 4 stocks at one time
+  STOCKS = ['aapl', 'bep', 'rei-un.to', 'nvda']
+  // STOCKS = ['jpm', 'aapl', 'bep', 'rei-un.to', 'nvda']
+}
 
 
 function Header(props) {
@@ -10,7 +22,16 @@ function Header(props) {
         <p>{props.title}</p>
       </div>
 
-      <div className="column open-column"></div>
+      <div className="column stocks-container">
+        <ul>
+          {STOCKS.map(symbol => {
+            return <Stock
+              key={symbol}
+              sym={symbol} />
+          })}
+
+        </ul>
+      </div>
 
       <div className="column right-column">
         <span>

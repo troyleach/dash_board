@@ -66,5 +66,3 @@ class CalendarContainer extends Component {
 }
 
 export default CalendarContainer;
-// AIzaSyA4jZTZS-XjtYPp8SYDTaNMWNMH_ZeRKwU
-// https://maps.googleapis.com/maps/api/timezone/json?location=49.283436, -123.130429&timestamp=1478880000&key=AIzaSyA4jZTZS-XjtYPp8SYDTaNMWNMH_ZeRKwU

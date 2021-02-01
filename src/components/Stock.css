@@ -1,0 +1,22 @@
+.individual-stock-container {
+  margin-right: 2rem;
+}
+
+.stock { }
+
+.stock-symbol {
+  font-size: 0.8em;
+  color: var(--third-text);
+}
+
+.stock-arrow {
+  margin-right: 5px;
+}
+
+.stock-is-up {
+  color: green;
+}
+
+.stock-is-down {
+  color: red;
+} 

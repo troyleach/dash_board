@@ -65,3 +65,44 @@ export function getDayOfTheWeek(date) {
   const dayOfTheWeek = DAYS[workingDateIndex]
   return dayOfTheWeek;
 };
+
+/**
+ *
+ * Gets the day before a date.
+ * Examples:
+ * if today is Wednesday @return Tuesday date
+ * @return { Date } Sun Nov 08 2020 20:46:51 GMT-0600 (Central Standard Time)
+ *
+ */
+export function getDayBefore(date) {
+  return new Date(date.setDate(date.getDate() - 1));
+}
+
+
+/**
+ *
+ * Gets the last weekday date.
+ * Examples:
+ * if today is Wednesday @return Wednesday date
+ * if today is Saturday || Sunday @return Fridays date
+ * @return { Date } Sun Nov 08 2020 20:46:51 GMT-0600 (Central Standard Time)
+ *
+ */
+export function getLastWeekDay() {
+  const today = new Date();
+
+  console.log('today', today)
+  if (today.getDay() === 0) {
+    // if today === Sunday
+    const twoDaysAgo = today.setDate(today.getDate() - 2)
+    const result = new Date(twoDaysAgo);
+    console.log('twoDaysAgo', result)
+    return result;
+  }
+
+  if (today.getDay() === 6) {
+    // if today === Saturday
+    const twoDaysAgo = today.setDate(today.getDate() - 1)
+    return new Date(twoDaysAgo);
+  }
+}; 
