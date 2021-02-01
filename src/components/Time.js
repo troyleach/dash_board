@@ -34,7 +34,10 @@ class DisplayTime extends Component {
   render() {
     return (
       <div className="time-container">
-        <div className='time-date-box time'>{this.state.time.toLocaleTimeString()}</div>
+        <div className='time-date-box time'>
+          <img className='chicago-flag' src='chicago-flag.png' alt='Chicago Flag' />
+          {this.state.time.toLocaleTimeString()}
+        </div>
         <div className='time-date-box date'>{this.displayDate(this.state.time)}</div>
       </div>
     );
