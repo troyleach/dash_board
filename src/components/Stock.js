@@ -64,29 +64,32 @@ class Stock extends Component {
   }
 
   async componentDidMount() {
-    let stockData;
-    console.log('ENV YO componentDidMount', process.env.REACT_APP_ENV)
-    if (process.env.REACT_APP_ENV === 'dev') {
-      stockData = fakeStockData;
-    } else {
-      const data = await getDayStocks(this.props.sym);
-      stockData = data.data;
+    if (process.env.REACT_APP_STOCKS_FEATURE) {
 
-      if (stockData["Error Message"]) {
-        console.error(`${stockData["Error Message"]} for symbol: ${this.props.sym}`)
-        alert('Something went wrong please try again')
+      let stockData;
+      console.log('ENV YO componentDidMount', process.env.REACT_APP_ENV)
+      if (process.env.REACT_APP_ENV === 'dev') {
+        stockData = fakeStockData;
+      } else {
+        const data = await getDayStocks(this.props.sym);
+        stockData = data.data;
+
+        if (stockData["Error Message"]) {
+          console.error(`${stockData["Error Message"]} for symbol: ${this.props.sym}`)
+          alert('Something went wrong please try again')
+        }
       }
-    }
 
-    console.log('DID I MAKE IT HERE YO', stockData)
-    this.stockUp(stockData["Time Series (Daily)"])
+      console.log('DID I MAKE IT HERE YO', stockData)
+      this.stockUp(stockData["Time Series (Daily)"])
 
-    if (stockData["Meta Data"]) {
-      this.setState({
-        symbol: stockData["Meta Data"]["2. Symbol"],
-        lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
-      });
-      console.log('STATE', this.state)
+      if (stockData["Meta Data"]) {
+        this.setState({
+          symbol: stockData["Meta Data"]["2. Symbol"],
+          lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
+        });
+        console.log('STATE', this.state)
+      }
     }
   }
 
