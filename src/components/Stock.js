@@ -57,6 +57,7 @@ class Stock extends Component {
 
   async componentDidMount() {
     let stockData;
+    console.log('ENV YO componentDidMount', process.env.NODE_ENV)
     if (process.env.NODE_ENV === 'development') {
       stockData = fakeStockData;
     } else {

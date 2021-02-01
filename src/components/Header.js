@@ -6,6 +6,7 @@ import "./Header.css";
 let STOCKS;
 
 
+console.log('ENV YO', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
   STOCKS = ['jpm', 'jpm', 'jpm', 'jpm']
 } else {
