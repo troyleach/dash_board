@@ -22,7 +22,7 @@ function Header(props) {
         <p>{props.title}</p>
       </div>
 
-      {REACT_APP_STOCKS_FEATURE &&
+      {REACT_APP_STOCKS_FEATURE === 'true' &&
         <div className="column stocks-container">
           <ul>
             {STOCKS.map(symbol => {

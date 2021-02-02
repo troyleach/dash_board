@@ -49,7 +49,7 @@ class TodosContainer extends Component {
     try {
       // TODO: I need to pass in the time zone blah... see api
       // Intl.DateTimeFormat().resolvedOptions().timeZone
-      // this seems to get the right timezone (as long as the broswer is set up right)
+      // this seems to get the right timezone (as long as the browser is set up right)
       // then I can pass that onto the API to get the correct todos back when the server time is tomorrow
       // const todos = await getTodos('group_by_assign_date');
       const scrumTodos = await getTodos('group_by_assign_date');
