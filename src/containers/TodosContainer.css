@@ -57,10 +57,6 @@ input.taskCheckbox:checked + label.taskLabel {
 	color: var(--second-text);
 }
 
-input[placeholder] {
-	/* font-size: 1em; */
-}
-
 /* .container {
 	width: 40%;
 	height: 400px;

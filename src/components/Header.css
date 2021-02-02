@@ -101,7 +101,7 @@ span.deleteStockBtn:hover {
 	cursor: default;
 }
 
-.addStockkBtn {
+.addStockBtn {
 	float: right;
 	color: red;
 	background: rgba(0,0,0,0);

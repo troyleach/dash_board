@@ -2,8 +2,6 @@
   margin-right: 2rem;
 }
 
-.stock { }
-
 .stock-symbol {
   font-size: 0.8em;
   color: var(--third-text);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getDayStocks } from '../services/stocks/stock';
-import { formateDate, getLastWeekDay, getDayBefore } from '../utils/dateHelpers';
+// import { formateDate, getLastWeekDay, getDayBefore, getLastActiveDate } from '../utils/dateHelpers';
 
 import fakeStockData from '../services/data/downStocks.json'
 // import fakeStockData from '../services/data/upStocks.json'
@@ -27,31 +27,22 @@ class Stock extends Component {
     return Math.sign(num) > 0;
   }
 
-  // TODO: maybe this should be more like stock vitals or something
-  stockUp(data) {
+  setStockData(data) {
     //FIXME: so what I think is happening is that the api i picked does
     // not have hourly updates, it jus shows the last close date.
     // I feel like I could use the Last Refreshed date instead of this business.
     // this is today
-    const lastWeekDay = getLastWeekDay();
-    // formateDate(new Date())
-    const weekDayDate = formateDate(lastWeekDay)
 
-    console.log('the new date LASTWEEKDAY', weekDayDate);
+    const lastRefreshDate = data['Meta Data']['3. Last Refreshed'];
+    // not sure I like this, what if the data returned is not in order as I think?
+    const prevLastRefreshDate = Object.keys(data["Time Series (Daily)"])[1]
 
-    // const dayBefore = getDayBefore(lastWeekDay);
-    // const dayBeforeDate = formateDate(dayBefore)
+    const lastRefreshStockData = data["Time Series (Daily)"][lastRefreshDate];
+    const prevLastRefreshStockData = data["Time Series (Daily)"][prevLastRefreshDate];
 
-    const dayBeforeDate = this.state.lastRefreshDate;
-    console.log('the new date DAYBEFORE', dayBeforeDate);
-
-    const yesterdayStock = data[dayBeforeDate];
-    const todaysStock = data[weekDayDate]
-
-    const closePrice = todaysStock['4. close'];
-    const previousClosePrice = yesterdayStock['4. close'];
+    const closePrice = lastRefreshStockData['4. close'];
+    const previousClosePrice = prevLastRefreshStockData['4. close'];
     const changeAmount = (parseFloat(closePrice, 10) - parseFloat(previousClosePrice, 10)).toFixed(2);
-
     const changeAmountPercent = ((changeAmount / previousClosePrice) * 100).toFixed(2);
 
 
@@ -64,33 +55,26 @@ class Stock extends Component {
   }
 
   async componentDidMount() {
-    if (process.env.REACT_APP_STOCKS_FEATURE) {
+    let stockData;
+    if (process.env.REACT_APP_ENV === 'dev') {
+      stockData = fakeStockData;
+    } else {
+      const data = await getDayStocks(this.props.sym);
+      stockData = data.data;
 
-      let stockData;
-      console.log('ENV YO componentDidMount', process.env.REACT_APP_ENV)
-      if (process.env.REACT_APP_ENV === 'dev') {
-        stockData = fakeStockData;
-      } else {
-        const data = await getDayStocks(this.props.sym);
-        stockData = data.data;
-
-        if (stockData["Error Message"]) {
-          console.error(`${stockData["Error Message"]} for symbol: ${this.props.sym}`)
-          alert('Something went wrong please try again')
-        }
-      }
-
-      console.log('DID I MAKE IT HERE YO', stockData)
-      this.stockUp(stockData["Time Series (Daily)"])
-
-      if (stockData["Meta Data"]) {
-        this.setState({
-          symbol: stockData["Meta Data"]["2. Symbol"],
-          lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
-        });
-        console.log('STATE', this.state)
+      if (stockData["Error Message"]) {
+        console.error(`${stockData["Error Message"]} for symbol: ${this.props.sym}`)
+        alert('Something went wrong please try again')
       }
     }
+
+    if (stockData["Meta Data"]) {
+      this.setState({
+        symbol: stockData["Meta Data"]["2. Symbol"],
+        lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
+      });
+    }
+    this.setStockData(stockData)
   }
 
   StockIsUp(stock) {
@@ -127,7 +111,6 @@ class Stock extends Component {
 
   render() {
     const { isStockUp } = this.state;
-    console.log('is the stock up or down', isStockUp)
     return (
       <>
         <li>

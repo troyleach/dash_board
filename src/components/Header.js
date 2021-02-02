@@ -6,10 +6,8 @@ import "./Header.css";
 let STOCKS;
 const REACT_APP_STOCKS_FEATURE = process.env.REACT_APP_STOCKS_FEATURE;
 
-
-console.log('ENV YO', process.env.REACT_APP_ENV)
 if (process.env.REACT_APP_ENV === 'dev') {
-  STOCKS = ['jpm', 'jpm', 'jpm', 'jpm']
+  STOCKS = ['jpm1', 'jpm2', 'jpm3', 'jpm4']
 } else {
   // can fit 4 stocks at one time
   STOCKS = ['aapl', 'bep', 'rei-un.to', 'nvda']
