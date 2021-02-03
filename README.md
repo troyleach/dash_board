@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 this is cool the icons
 https://react-icons.github.io/react-icons
 
+
+## third party API's
+### Stocks
+[Alpha Vantage](https://www.alphavantage.co/documentation/)
+
 ## Available Scripts
 
 In the project directory, you can run:

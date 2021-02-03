@@ -7,10 +7,12 @@ let STOCKS;
 const REACT_APP_STOCKS_FEATURE = process.env.REACT_APP_STOCKS_FEATURE;
 
 if (process.env.REACT_APP_ENV === 'dev') {
-  STOCKS = ['jpm1', 'jpm2', 'jpm3', 'jpm4']
+  STOCKS = ['amc', 'amc2']
 } else {
-  // can fit 4 stocks at one time
-  STOCKS = ['aapl', 'bep', 'rei-un.to', 'nvda']
+  // can fit 4 stocks at one time NOTE: I can only make 5 requests a second anyways. I can
+  // not make one call and get back several tickers
+  STOCKS = ['jpm', 'bep', 'amc', 'nvda']
+  // STOCKS = ['jpm', 'bep', 'rei-un.to', 'nvda']
   // STOCKS = ['jpm', 'aapl', 'bep', 'rei-un.to', 'nvda']
 }
 

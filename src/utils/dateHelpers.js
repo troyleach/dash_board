@@ -107,32 +107,3 @@ export function getLastWeekDay() {
   }
   return today;
 };
-
-/**
- *
- * Gets the last active date based on the refresh date.
- * Examples:
- * if today is Wednesday @return Wednesday date
- * if today is Saturday || Sunday @return Fridays date
- * @return { Date } Sun Nov 08 2020 20:46:51 GMT-0600 (Central Standard Time)
- *
- */
-// I don't use this anymore
-// export function getLastActiveDate(date) {
-//   const today = new Date();
-
-//   if (today.getDay() === 0) {
-//     // if today === Sunday
-//     const twoDaysAgo = today.setDate(today.getDate() - 2)
-//     const result = new Date(twoDaysAgo);
-//     console.log('twoDaysAgo', result)
-//     return result;
-//   }
-
-//   if (today.getDay() === 6) {
-//     // if today === Saturday
-//     const twoDaysAgo = today.setDate(today.getDate() - 1)
-//     return new Date(twoDaysAgo);
-//   }
-//   return today;
-// }; 

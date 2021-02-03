@@ -18,3 +18,18 @@
 .stock-is-down {
   color: red;
 } 
+
+.stock-separator {
+  color: yellow;
+  /* not sure about this padding business */
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.change {
+  padding-right: 5px;
+}
+
+.price {
+  padding-left: 5px;
+}

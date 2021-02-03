@@ -7,19 +7,18 @@ import fakeStockData from '../services/data/downStocks.json'
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 
 import "./Stock.css";
+const { isEmpty } = require('lodash');
 
 
 class Stock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastRefreshDate: null,
-      symbol: '',
-      close: '',
-      prevClose: '',
+      symbol: 'XYZ',
+      price: 0.00,
       isStockUp: false,
-      changeAmountPercent: 0.00,
-      changeAmount: 0.00
+      change: 0.00,
+      changePercent: 0.00
     }
   }
 
@@ -27,58 +26,30 @@ class Stock extends Component {
     return Math.sign(num) > 0;
   }
 
-  setStockData(data) {
-    //FIXME: so what I think is happening is that the api i picked does
-    // not have hourly updates, it jus shows the last close date.
-    // I feel like I could use the Last Refreshed date instead of this business.
-    // this is today
-
-    const lastRefreshDate = data['Meta Data']['3. Last Refreshed'];
-    // not sure I like this, what if the data returned is not in order as I think?
-    const prevLastRefreshDate = Object.keys(data["Time Series (Daily)"])[1]
-
-    const lastRefreshStockData = data["Time Series (Daily)"][lastRefreshDate];
-    const prevLastRefreshStockData = data["Time Series (Daily)"][prevLastRefreshDate];
-
-    const closePrice = lastRefreshStockData['4. close'];
-    const previousClosePrice = prevLastRefreshStockData['4. close'];
-    const changeAmount = (parseFloat(closePrice, 10) - parseFloat(previousClosePrice, 10)).toFixed(2);
-    const changeAmountPercent = ((changeAmount / previousClosePrice) * 100).toFixed(2);
-
-
-    this.setState({
-      close: closePrice,
-      isStockUp: this.positiveNumber(changeAmount),
-      changeAmountPercent,
-      changeAmount
-    });
-  }
-
   async componentDidMount() {
     let stockData;
     if (process.env.REACT_APP_ENV === 'dev') {
-      stockData = fakeStockData;
+      stockData = fakeStockData["Global Quote"];
     } else {
       const data = await getDayStocks(this.props.sym);
-      stockData = data.data;
-
-      if (stockData["Error Message"]) {
-        console.error(`${stockData["Error Message"]} for symbol: ${this.props.sym}`)
-        alert('Something went wrong please try again')
-      }
+      stockData = data.data["Global Quote"];
     }
+    const change = parseFloat(stockData["09. change"]);
+    const price = parseFloat(stockData["05. price"])
 
-    if (stockData["Meta Data"]) {
+    if (!isEmpty(stockData)) {
       this.setState({
-        symbol: stockData["Meta Data"]["2. Symbol"],
-        lastRefreshDate: stockData["Meta Data"]["3. Last Refreshed"]
+        symbol: stockData["01. symbol"],
+        price,
+        isStockUp: this.positiveNumber(change),
+        change,
+        changePercent: stockData["10. change percent"],
       });
     }
-    this.setStockData(stockData)
   }
 
   StockIsUp(stock) {
-    const { symbol, changeAmount, changeAmountPercent, close } = stock;
+    const { symbol, change, changePercent, price } = stock;
     return (
       <>
         <span className='stock'>
@@ -86,7 +57,10 @@ class Stock extends Component {
             className='stock-arrow'
             color='green' />
           <span className='stock-symbol'>{symbol.toUpperCase()}</span><br />
-          <small className='stock-is-up'>{changeAmount} {close}</small>
+          <small className='stock-is-up'>
+            <span className='change'>+{change.toFixed(2)}</span>
+            <span className='price'>{parseFloat(price).toFixed(2)}</span>
+          </small>
           {/* <small className='stock-is-up'>{changeAmount} ({changeAmountPercent}%) {close}</small> */}
         </span>
       </>
@@ -94,7 +68,7 @@ class Stock extends Component {
   }
 
   StockIsDown(stock) {
-    const { symbol, changeAmount, changeAmountPercent, close } = stock;
+    const { symbol, change, changePercent, price } = stock;
     return (
       <>
         <span className='stock'>
@@ -102,7 +76,11 @@ class Stock extends Component {
             className='stock-arrow'
             color='red' />
           <span className='stock-symbol'>{symbol.toUpperCase()}</span><br />
-          <small className='stock-is-down'>{changeAmount} {close}</small>
+          <small className='stock-is-down'>
+            <span className='change'>{change.toFixed(2)}</span>
+            <span className='stock-separator'>|</span>
+            <span className='price'>{parseFloat(price).toFixed(2)}</span>
+          </small>
           {/* <small className='stock-is-down'>{changeAmount} ({changeAmountPercent}%) {close}</small> */}
         </span>
       </>

@@ -29,9 +29,11 @@
     // This is so the page will reload when the tab is focused again to fetch current data
     // this does not work like I thought, it refreshes is I hide the tab, if I bounce from this
     // window to another then come back it does not refresh
-    var blurred = false;
-    window.onblur = function () { blurred = true; };
-    window.onfocus = function () { blurred && (location.reload()); };
+    // I do not want to do this, if I have api calls to 3rd party it eats at my number of
+    // allowed requests. not sure why did this anyways
+    // var blurred = false;
+    // window.onblur = function () { blurred = true; };
+    // window.onfocus = function () { blurred && (location.reload()); };
   </script>
 </head>
 
