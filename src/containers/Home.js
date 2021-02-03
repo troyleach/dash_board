@@ -41,16 +41,18 @@ function Home(props) {
               <TodosContainer
                 type='yesterdayScrum' />
             </div>
+
             <div className="box f">
               <div className="card-title">Today scrum <span className='assign-date'>{today}</span></div>
               <TodosContainer
                 type='todayScrum' />
             </div>
-          </div>
-          <div className="box g">
-            <div className="card-title">Todos</div>
-            <TodosContainer
-              type='todos' />
+
+            <div className="box g">
+              <div className="card-title">Todos</div>
+              <TodosContainer
+                type='todos' />
+            </div>
           </div>
         </div>
         <div className="box d">
