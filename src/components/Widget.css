@@ -1,0 +1,6 @@
+.widget-title {
+  font-size: small;
+  padding: 5px;
+  border-bottom: 1px solid var(--underline-color);
+  margin-bottom: 5px;
+}

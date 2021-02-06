@@ -4,6 +4,7 @@ import TodosContainer from './TodosContainer';
 import DisplayTime from '../components/Time';
 import { getYesterdayDate, getTomorrowsDate } from '../utils/dateHelpers';
 import CalendarContainer from '../components/Calendar';
+import Widget from '../components/Widget';
 
 
 function Home(props) {
@@ -14,7 +15,25 @@ function Home(props) {
     <div className="home-container">
       <div className="outer-wrapper">
         <div className="box a">
-          <div className="card-title">Box Scores</div>
+          <div className="inner-wrapper">
+            <div className="box event">
+              <Widget
+                type='Github'
+                title='Github'
+                dataOne='first data'
+                dataTwo='Second data' />
+            </div>
+
+            <div className="box a-a">
+              <div className="inner-wrapper">
+                <div className="box event">
+                  <Widget
+                    type='Boxscore'
+                    title='Box Scores' />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="box b">
           {/* <div className="card-title">Whats on tap for today</div> */}
