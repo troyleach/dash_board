@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getIssues } from '../services/api/github';
+import { getIssues, getGraymatterIssues } from '../services/api/github';
 
 import "./Github.css";
 
@@ -30,6 +30,8 @@ class Github extends Component {
 
   async componentDidMount() {
     const githubData = await getIssues();
+    const grayMatterData = await getGraymatterIssues();
+    // FiXME: I am broken here ^
     const pull_request = this.formatData(githubData);
     this.setState({
       pull_request

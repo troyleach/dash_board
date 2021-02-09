@@ -16,3 +16,14 @@ export const getIssues = (params) => {
     }
   )
 }
+
+const grayMatterUrl = 'https://api.github.com/repos/GrayMatterDashboard/graymatter/issues'
+
+export const getGraymatterIssues = (params) => {
+  return axios.get(
+    `${grayMatterUrl}`,
+    {
+      headers: AUTH_HEADER
+    }
+  )
+}
