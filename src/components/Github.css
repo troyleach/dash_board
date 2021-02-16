@@ -1,10 +1,56 @@
 .pr-title {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+
+.github-container ul {
+  padding: 10px;
+}
+
+.pr-li-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 2.5rem;
+  /* display: inline-flex; */
+
+  /* text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; */
+  /* width: 100%; */
 }
 
 .pr-li-container a:link a:visited {
   color: green;
 }
 
+.git-avatar {
+  border: 1px solid red;
+  flex: 0 0 100%;
+  width: 30px;
+}
+
+.repository-title {
+  border: 1px solid green;
+  /* padding-left: 10px; */
+  max-width: 100%;
+  text-align: left;
+  flex: 0 0 25%;
+}
+
+.repository-name {
+  font-size: 75%;
+  text-justify: left;
+}
+
+
+.pr-information {
+  border: 1px solid blue;
+  /* padding-left: 10px; */
+  max-width: 100%;
+}
+ 
+
 .pr-anchor-tag {}
+
+
