@@ -50,7 +50,8 @@ class Github extends Component {
   truncateString(string) {
     const truncatedString = string.slice(0, 20)
 
-    return truncatedString + '...';
+    // return truncatedString + '...';
+    return string;
   }
 
   async componentDidMount() {
@@ -92,14 +93,14 @@ class Github extends Component {
 
     return pullRequests.map((pr, k) => {
       return (
-        <li key={k} className='pr-li-container'>
-          <div className='git-avatar'>
-            <img className='git-avatar' src={avatar} alt='default org avatar' />
+        <li key={k} className='pr-li-wrapper'>
+          <div className='github-box git-avatar'>
+            <img className='git-avatar-img' src={avatar} alt='default org avatar' />
           </div>
-          <div className='repository-title'>
+          <div className='github-box repository-title'>
             <span className='repository-name'>{pr.repository}</span> <span className='pr-title'>{this.truncateString(pr.title)}</span>
           </div>
-          <div className='pr-information'>
+          <div className='github-box pr-information'>
             <a className='pr-anchor-tag' href={pr.html_url} target='blank'>
               <span className='pr-number'>#{pr.number}</span> <span className='pr-open-date'>{pr.openDate}</span>
             </a>

@@ -8,10 +8,10 @@
 }
 
 .pr-li-container {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 2.5rem;
+  height: 2.5rem; */
   /* display: inline-flex; */
 
   /* text-overflow: ellipsis;
@@ -25,32 +25,74 @@
 }
 
 .git-avatar {
-  border: 1px solid red;
-  flex: 0 0 100%;
-  width: 30px;
+  /* border: 1px solid purple;
+  flex: 0 0 100%; */
 }
 
 .repository-title {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   /* padding-left: 10px; */
-  max-width: 100%;
-  text-align: left;
-  flex: 0 0 25%;
+  /* max-width: 100%;
+  text-align: left; */
 }
 
 .repository-name {
   font-size: 75%;
-  text-justify: left;
+  /* text-justify: left; */
 }
 
 
 .pr-information {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   /* padding-left: 10px; */
-  max-width: 100%;
+  /* max-width: 100%; */
 }
  
 
 .pr-anchor-tag {}
+
+
+
+/* the new css for my thing */
+.pr-li-wrapper {
+  /* border: 1px solid blue; */
+  display: grid;
+  grid-template-columns: 30px;
+  /* grid-gap: 10px; */
+  /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr) ) ; */
+  /* background-color: #fff;
+  color: #444; */
+}
+
+.github-box {
+  border: 1px solid red;
+  /* background-color: #444;
+  color: #fff; */
+  /* border-radius: 5px; */
+  /* padding: 5px; */
+  /* font-size: 150%; */
+
+}
+
+.git-avatar {
+  grid-column: 1;
+  grid-row: auto / span 2;
+}
+
+.repository-title {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.pr-information {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.git-avatar-img {
+  width: 30px;
+}
+
+
 
 
