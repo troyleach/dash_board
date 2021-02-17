@@ -48,10 +48,12 @@ class Github extends Component {
   }
 
   truncateString(string) {
-    const truncatedString = string.slice(0, 20)
+    let truncatedString = string;
+    if (string.length > 50) {
+      truncatedString = string.slice(0, 48) + ' ...';
+    }
 
-    // return truncatedString + '...';
-    return string;
+    return truncatedString;
   }
 
   async componentDidMount() {
@@ -98,11 +100,13 @@ class Github extends Component {
             <img className='git-avatar-img' src={avatar} alt='default org avatar' />
           </div>
           <div className='github-box repository-title'>
-            <span className='repository-name'>{pr.repository}</span> <span className='pr-title'>{this.truncateString(pr.title)}</span>
+            <span className='pr-title'>{this.truncateString(pr.title)}</span>
           </div>
           <div className='github-box pr-information'>
             <a className='pr-anchor-tag' href={pr.html_url} target='blank'>
-              <span className='pr-number'>#{pr.number}</span> <span className='pr-open-date'>{pr.openDate}</span>
+              <span className='repository-name'>{pr.repository}</span> |
+               <span className='pr-number'>#{pr.number}</span> |
+               <span className='pr-open-date'>{pr.openDate}</span>
             </a>
           </div>
 
