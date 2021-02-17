@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 this is cool the icons
 https://react-icons.github.io/react-icons
 
+### HTML
+[If a grid is needed follow this pattern](https://gridbyexample.com/examples/)
+
 
 ## third party API's
 ### Stocks
