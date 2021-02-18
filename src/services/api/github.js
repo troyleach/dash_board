@@ -36,6 +36,7 @@ export const getAetnaIssues = (_params) => {
  */
 export const getOrgAvatar = (org) => {
   // FIXME: this can be done better for sure
+  // I was thinking that I could make this all in one call, but maybe not
   const url = `https://api.github.com/orgs/${org}`;
   return axios.get(
     `${url}`,
