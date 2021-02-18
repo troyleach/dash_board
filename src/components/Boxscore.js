@@ -11,7 +11,6 @@ class Github extends Component {
   async componentDidMount() { };
 
   render() {
-    console.log('github props', this.props)
     const { title } = this.props;
     return (
       <>

@@ -13,14 +13,6 @@ class Widget extends Component {
     this.state = {}
   }
 
-  // item = () => {
-  //   let component = this.props.type;
-  //   return React.createElement(component, {
-  //     data: { type: 'data' },
-  //     key: '1'
-  //   })
-  // }
-
   async componentDidMount() { };
 
   render() {
@@ -30,7 +22,6 @@ class Widget extends Component {
     }
     const { type, title } = this.props
     const Component = componentMapping[type]
-    console.log('here is the component', Component)
 
     return (
       <>

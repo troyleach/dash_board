@@ -1,4 +1,3 @@
-import { pull } from 'lodash';
 import React, { Component } from 'react'
 import { getIssues, getAetnaIssues, getOrgAvatar } from '../services/api/github';
 
@@ -62,10 +61,6 @@ class Github extends Component {
     const aetnaData = await getAetnaIssues();
     const aetnaAvatarUrl = await getOrgAvatar('aetnahealth')
 
-    console.log('Aetna PRs', aetnaData.data);
-
-    // let pull_request = this.formatData(githubData);
-    // pull_request = pull_request.concat(this.formatAetnaData(aetnaData));
     const formattedGitHubData = this.formatData(githubData);
     const formattedAetnaData = this.formatAetnaData(aetnaData);
 
@@ -78,9 +73,7 @@ class Github extends Component {
     prs.push(aetnaStuff);
     prs.push(githubStuff);
 
-    console.log('new test payload', prs);
-
-
+    console.log('Github PRS in Github.js', prs);
 
     this.setState({
       pull_request: prs
@@ -109,7 +102,6 @@ class Github extends Component {
                <span className='pr-open-date'>{pr.openDate}</span>
             </a>
           </div>
-
         </li>
       )
     })
