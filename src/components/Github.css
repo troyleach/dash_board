@@ -1,0 +1,57 @@
+.pr-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.github-container ul {
+  padding: 10px;
+}
+
+.pr-li-wrapper a:link a:visited {
+  color: green;
+}
+
+.git-avatar { }
+
+.repository-name, .pr-number, .pr-open-date {
+  font-size: 85%;
+  padding: 0 10px 0 10px;
+}
+
+.pr-number { }
+
+.pr-open-date { }
+
+.pr-li-wrapper {
+  padding-bottom: 10px;
+  display: grid;
+  grid-template-columns: 30px;
+}
+
+.github-box {
+  /* border: 1px solid red; */
+}
+
+.git-avatar {
+  grid-column: 1;
+  grid-row: auto / span 2;
+}
+
+.repository-title {
+  padding-left: 5px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.pr-information {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.git-avatar-img {
+  width: 30px;
+}
+
+
+
+

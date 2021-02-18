@@ -31,6 +31,11 @@ body {
   background: var(--content-background-color);
 }
 
+a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
