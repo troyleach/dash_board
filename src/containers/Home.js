@@ -79,7 +79,11 @@ function Home(props) {
           {/* TODO: so here this will be d-a.
               I know this is spanning B and C but 
               I think it should still be d-a */}
-          <div className="card-title">Some cool thing here</div>
+          <Widget
+            type='News'
+            title='The Wire'
+            dataOne='first data'
+            dataTwo='Second data' />
         </div>
       </div>
     </div>

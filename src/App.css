@@ -1,6 +1,6 @@
 :root {
   --red: #ff6f69;
-  --header: #000;
+  --base: #000;
   --content-background-color: #1b1c1f;
   --cards-background-color: #2a2a2a;
   --yellow: #ffcc5c;
@@ -23,6 +23,7 @@
 html {
   position: relative;
   min-height: 100%;
+  background-color: var(--base);
 }
 
 body {

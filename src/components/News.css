@@ -1,0 +1,34 @@
+.news-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  /* background-color: #fff; */
+  color: #444;
+}
+
+.news-box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  position: relative;
+}
+
+.news-image {
+  width: 100%;
+}
+
+.news-title {
+  font-size: 0.8em;
+  color: #fff;
+}
+
+.published-wrapper {
+  position: absolute;
+  right: 5px;
+  bottom: 0px;
+}
+.news-published-at {
+  font-size: small;
+}

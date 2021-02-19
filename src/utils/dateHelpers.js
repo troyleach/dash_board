@@ -35,6 +35,26 @@ export function formateDate(date) {
   return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 }
 
+/**
+ *
+ * @params {String} - "2021-02-19T02:06:20Z"
+ * @return {String} - "Thu, February 18, 2021, 08:06:20 PM"
+ *
+ */
+export function formateUTCDateString(dateString) {
+  const options = {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', options)
+};
 
 /**
  *
