@@ -12,6 +12,9 @@ https://react-icons.github.io/react-icons
 ### Stocks
 [Alpha Vantage](https://www.alphavantage.co/documentation/)
 
+### News
+[mediastack](https://mediastack.com/documentation#example_api_response)
+
 ## Available Scripts
 
 In the project directory, you can run:

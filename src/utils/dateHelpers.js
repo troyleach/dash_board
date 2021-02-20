@@ -42,15 +42,22 @@ export function formateDate(date) {
  *
  */
 export function formateUTCDateString(dateString) {
+  // TODO: maybe I don't want to display the time
+  // const options = {
+  //   weekday: 'short',
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric',
+  //   hour12: true,
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  //   second: "2-digit"
+  // };
   const options = {
     weekday: 'short',
-    year: 'numeric',
     month: 'long',
     day: 'numeric',
-    hour12: true,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
+    year: 'numeric',
   };
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', options)
