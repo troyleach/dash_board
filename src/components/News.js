@@ -44,23 +44,11 @@ class News extends Component {
     const size = 6;
     let news;
 
-    if (process.env.REACT_APP_ENV === 'dev') {
+    try {
       news = mockNewsData["articles"].slice(0, size);
-    } else {
-      try {
-        const result = await getNews(
-          {
-            key,
-            country: 'us',
-            endPoint: 'top-headlines'
-          }
-        )
-        console.log('news data', result.data.articles);
-        news = result.data.articles.slice(0, size);
-      } catch (error) {
-        // FIXME: Look at the error sheet and code per the errors
-        console.error('Something went wrong', error)
-      }
+    } catch (error) {
+      // FIXME: Look at the error sheet and code per the errors
+      console.error('Something went wrong with your news', error)
     }
 
     this.setState({
