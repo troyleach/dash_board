@@ -13,7 +13,7 @@ https://react-icons.github.io/react-icons
 [Alpha Vantage](https://www.alphavantage.co/documentation/)
 
 ### News
-[mediastack](https://mediastack.com/documentation#example_api_response)
+[newsapi](https://newsapi.org/docs/endpoints/everything)
 
 ## Available Scripts
 
