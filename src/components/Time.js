@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./Time.css";
 
+import { keepMeAwake } from '../utils/KeepWake';
+
 // FIXME: this is more then 'time' fix this, this class
 // returns more then just time it also returns date formated
 // this is gross now I also can not use this in other places
@@ -29,6 +31,7 @@ class DisplayTime extends Component {
 
   componentWillMount() {
     setInterval(() => this.currentTime(), 1000)
+    setInterval(() => keepMeAwake(), 780000)
   }
 
   render() {

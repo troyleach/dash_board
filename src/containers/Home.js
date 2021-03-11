@@ -8,9 +8,10 @@ import Widget from '../components/Widget';
 
 
 function Home(props) {
-  const yesterday = getYesterdayDate().toLocaleDateString()
+  const yesterday = getYesterdayDate().toLocaleDateString();
   const today = new Date().toLocaleDateString();
   const tomorrow = getTomorrowsDate();
+
   return (
     <div className="home-container">
       <div className="outer-wrapper">
