@@ -31,7 +31,19 @@ class DisplayTime extends Component {
 
   componentWillMount() {
     setInterval(() => this.currentTime(), 1000)
-    setInterval(() => keepMeAwake(), 780000)
+    let startTime, endTime;
+    const today = new Date();
+    startTime = new Date(today).setHours(8, 0);
+    endTime = new Date(today).setHours(22, 0);
+
+    console.log('Hello world startTime, endTime today: ',
+      new Date(startTime).toLocaleString(),
+      new Date(endTime).toLocaleString(),
+      today)
+    // FIXME: this is not the right way of doing this. maybe I should use new-relic
+    if (today > startTime && today < endTime) {
+      setInterval(() => keepMeAwake(), 780000)
+    }
   }
 
   render() {

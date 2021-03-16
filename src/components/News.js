@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { getNews } from '../services/api/news';
 import { formateUTCDateString } from '../utils/dateHelpers';
 
 import mockNewsData from '../services/data/news.json';
 
 import "./News.css";
-
-const key = process.env.REACT_APP_NEWS_API_KEY;
-
 
 class News extends Component {
   constructor(props) {
@@ -19,10 +15,7 @@ class News extends Component {
 
 
   newsWidget(news) {
-    console.log('news YO', news);
-
     return news.map((i, idx) => {
-      console.log('what does this say', idx);
       const klass = `news-box a-${idx}`
       return (
         <div key={idx} className={klass}>
