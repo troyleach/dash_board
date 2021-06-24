@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./Time.css";
 
+import { keepMeAwake } from '../utils/KeepWake';
+
 // FIXME: this is more then 'time' fix this, this class
 // returns more then just time it also returns date formated
 // this is gross now I also can not use this in other places
@@ -29,6 +31,19 @@ class DisplayTime extends Component {
 
   componentWillMount() {
     setInterval(() => this.currentTime(), 1000)
+    let startTime, endTime;
+    const today = new Date();
+    startTime = new Date(today).setHours(8, 0);
+    endTime = new Date(today).setHours(22, 0);
+
+    console.log('Hello world startTime, endTime today: ',
+      new Date(startTime).toLocaleString(),
+      new Date(endTime).toLocaleString(),
+      today)
+    // FIXME: this is not the right way of doing this. maybe I should use new-relic
+    if (today > startTime && today < endTime) {
+      setInterval(() => keepMeAwake(), 780000)
+    }
   }
 
   render() {

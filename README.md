@@ -12,6 +12,9 @@ https://react-icons.github.io/react-icons
 ### Stocks
 [Alpha Vantage](https://www.alphavantage.co/documentation/)
 
+### News
+[newsapi](https://newsapi.org/docs/endpoints/everything)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -74,6 +77,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 ### Deployment
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+To deploy the news
+bash deployNews.sh
+
 
 ### `yarn build` fails to minify
 

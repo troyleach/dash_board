@@ -8,9 +8,10 @@ import Widget from '../components/Widget';
 
 
 function Home(props) {
-  const yesterday = getYesterdayDate().toLocaleDateString()
+  const yesterday = getYesterdayDate().toLocaleDateString();
   const today = new Date().toLocaleDateString();
   const tomorrow = getTomorrowsDate();
+
   return (
     <div className="home-container">
       <div className="outer-wrapper">
@@ -79,7 +80,11 @@ function Home(props) {
           {/* TODO: so here this will be d-a.
               I know this is spanning B and C but 
               I think it should still be d-a */}
-          <div className="card-title">Some cool thing here</div>
+          <Widget
+            type='News'
+            title='The Wire'
+            dataOne='first data'
+            dataTwo='Second data' />
         </div>
       </div>
     </div>
