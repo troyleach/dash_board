@@ -207,7 +207,7 @@ class TodosContainer extends Component {
               name={type}
               className="taskInput"
               type="text"
-              placeholder="Add a task" maxLength="50"
+              placeholder="Add a task"
               onKeyPress={this.addTodo}
               value={this.state.inputValue} onChange={this.handleChange} />
           }
@@ -217,13 +217,23 @@ class TodosContainer extends Component {
             {this.state[type].map((todo) => {
               return (
                 <li className="task" todo={todo} key={todo.id}>
-                  {/* I added || false bc I was getting a controlled vs uncontrolled error in console */}
-                  <input className="taskCheckbox" type="checkbox"
-                    checked={todo.completed || false}
-                    onChange={(event) => this.markComplete(event, todo)} />
-                  <label className="taskLabel">{todo.title}</label>
-                  <span className="deleteTaskBtn"
-                    onClick={(e) => this.removeTodo(todo)} >x</span>
+                  <div class="task-wrapper">
+                    <div class="task-box task-check-box">
+                      {/* I added || false bc I was getting a controlled vs uncontrolled error in console */}
+                      <input className="taskCheckbox" type="checkbox"
+                        checked={todo.completed || false}
+                        onChange={(event) => this.markComplete(event, todo)} />
+                    </div>
+                    <div class="task-box task-text">
+                      <label className="taskLabel">
+                        <p className='taskP'>{todo.title}</p>
+                      </label>
+                    </div>
+                    <div class="task-box task-delete-button">
+                      <span className="deleteTaskBtn"
+                        onClick={(e) => this.removeTodo(todo)} >x</span>
+                    </div>
+                  </div>
                 </li>
               )
             })}

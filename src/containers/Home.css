@@ -1,3 +1,6 @@
+/* For the grid layout I used grid by example */
+/* https://gridbyexample.com/examples/ */
+
 .home-container {
   border: var(--border);
   min-height: 100vh;

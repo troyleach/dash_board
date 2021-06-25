@@ -22,6 +22,7 @@ li.task:hover .deleteTaskBtn {
 
 input.taskCheckbox {
 	position: relative;
+  top: 35%;
 	float: left;
 	margin-right: 10px;
 	-webkit-appearance: none;
@@ -93,6 +94,8 @@ input.taskCheckbox:checked + label.taskLabel {
 }
 
 .deleteTaskBtn {
+	position: relative;
+  top: 35%;
 	float: right;
 	color: red;
 	background: rgba(0,0,0,0);
@@ -105,5 +108,34 @@ input.taskCheckbox:checked + label.taskLabel {
 	opacity: 0;
 	line-height: 0;
 	margin-right: 5px;
+	margin-left: 10px;
 	cursor: default;
+}
+
+.taskP {
+  text-align: justify !important;
+}
+
+.task-wrapper {
+  display: grid;
+  grid-template-columns: 40px 480px 40px;
+}
+
+.task-box {
+  position: relative;
+}
+
+.task-check-box {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+}
+
+.task-text {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.task-delete-button {
+  grid-column: 3;
+  grid-row: 1;
 }
