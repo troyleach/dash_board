@@ -8,7 +8,8 @@ class Clock extends Component {
     this.state = {
       locales: 'en-US',
       options: {
-        timeZone: 'America/Denver'
+        timeZone: props.region,
+        flag: props.flag
       }
     }
   }
@@ -18,7 +19,8 @@ class Clock extends Component {
     const date = new Date();
     let time = date.toLocaleTimeString(locales, options)
     this.setState({
-      time: time
+      time: time,
+      flag: options.flag
     })
   }
 
@@ -27,9 +29,16 @@ class Clock extends Component {
   }
 
   render() {
-    const { time } = this.state;
+    const { time, flag } = this.state;
+    const flagUrl = `${flag}.png`;
+    const flagCss = `${flag}-flag`;
     return (
-      <span className='clock'>{time}</span>
+      <>
+        <span>
+          <img className={flagCss} src={flagUrl} alt='Colorado Flag' />
+        </span>
+        <span className='clock'>{time}</span>
+      </>
     );
   }
 

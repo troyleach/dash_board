@@ -55,25 +55,28 @@ class Github extends Component {
     return truncatedString;
   }
 
+  
   async componentDidMount() {
     let prs = [];
-    const githubData = await getIssues();
-    const aetnaData = await getAetnaIssues();
-    const aetnaAvatarUrl = await getOrgAvatar('aetnahealth')
+    if (process.env.REACT_APP_ENV !== 'dev') {
+      const githubData = await getIssues();
+      const aetnaData = await getAetnaIssues();
+      const aetnaAvatarUrl = await getOrgAvatar('aetnahealth')
 
-    const formattedGitHubData = this.formatData(githubData);
-    const formattedAetnaData = this.formatAetnaData(aetnaData);
+      const formattedGitHubData = this.formatData(githubData);
+      const formattedAetnaData = this.formatAetnaData(aetnaData);
 
-    const aetnaStuff = {};
-    const githubStuff = {};
+      const aetnaStuff = {};
+      const githubStuff = {};
 
-    aetnaStuff[aetnaAvatarUrl.data.avatar_url] = formattedAetnaData;
-    githubStuff['profileIcon_headshot.png'] = formattedGitHubData;
+      aetnaStuff[aetnaAvatarUrl.data.avatar_url] = formattedAetnaData;
+      githubStuff['profileIcon_headshot.png'] = formattedGitHubData;
 
-    prs.push(aetnaStuff);
-    prs.push(githubStuff);
+      prs.push(aetnaStuff);
+      prs.push(githubStuff);
+    };
 
-    console.log('Github PRS in Github.js', prs);
+    // console.log('Github PRS in Github.js', prs);
 
     this.setState({
       pull_request: prs

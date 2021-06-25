@@ -54,7 +54,7 @@
   line-height: normal;
 }
 
-.colorado-flag {
+.co-flag {
   border: var(--border);
   height: 2.1rem;
   text-align: right;
@@ -64,9 +64,19 @@
   margin-right: 0.5rem;
 }
 
-.chicago-flag {
+.chi-flag {
   border: var(--border);
   height: 1.5rem;
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-right: 0.5rem;
+}
+
+.fl-flag {
+  border: var(--border);
+  height: 2rem;
   text-align: right;
   display: inline-block;
   vertical-align: middle;

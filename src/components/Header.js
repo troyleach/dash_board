@@ -38,10 +38,12 @@ function Header(props) {
       }
 
       <div className="column right-column">
-        <span>
-          <img className='colorado-flag' src='co-flag-icon.png' alt='Colorado Flag' />
-        </span>
-        <Clock />
+        <Clock 
+          region='America/Chicago'
+          flag='chi'/>
+        <Clock 
+          region='US/Eastern'
+          flag='fl'/>
         <span className='user-name'>{props.userName}</span>
       </div>
     </div>

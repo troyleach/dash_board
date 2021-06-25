@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./Time.css";
+import Clock from './Clock';
 
 import { keepMeAwake } from '../utils/KeepWake';
 
@@ -30,16 +31,13 @@ class DisplayTime extends Component {
   }
 
   componentWillMount() {
+    // FIXME: delete all this code... blah 🤮
     setInterval(() => this.currentTime(), 1000)
     let startTime, endTime;
     const today = new Date();
     startTime = new Date(today).setHours(8, 0);
     endTime = new Date(today).setHours(22, 0);
 
-    console.log('Hello world startTime, endTime today: ',
-      new Date(startTime).toLocaleString(),
-      new Date(endTime).toLocaleString(),
-      today)
     // FIXME: this is not the right way of doing this. maybe I should use new-relic
     if (today > startTime && today < endTime) {
       setInterval(() => keepMeAwake(), 780000)
@@ -50,8 +48,9 @@ class DisplayTime extends Component {
     return (
       <div className="time-container">
         <div className='time-date-box time'>
-          <img className='chicago-flag' src='chicago-flag.png' alt='Chicago Flag' />
-          {this.state.time.toLocaleTimeString()}
+        <Clock 
+          region='America/Denver'
+          flag='co'/>
         </div>
         <div className='time-date-box date'>{this.displayDate(this.state.time)}</div>
       </div>
