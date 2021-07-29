@@ -30,7 +30,8 @@ class DisplayTime extends Component {
     return `${this.DAYS[date.getDay()]} ${this.MONTHS[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
   }
 
-  componentWillMount() {
+  // componentWillMount() {
+  componentDidMount() {
     // FIXME: delete all this code... blah 🤮
     setInterval(() => this.currentTime(), 1000)
     let startTime, endTime;

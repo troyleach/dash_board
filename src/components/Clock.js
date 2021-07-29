@@ -24,7 +24,9 @@ class Clock extends Component {
     })
   }
 
-  componentWillMount() {
+  // FIXME:?
+  // componentWillMount() {
+  componentDidMount() {
     setInterval(() => this.currentTime(), 1000)
   }
 

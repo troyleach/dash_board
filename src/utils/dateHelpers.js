@@ -71,9 +71,17 @@ export function formateUTCDateString(dateString) {
  *
  */
 export function formateTime(start, end) {
+  let timeString;
   const options = { hour: '2-digit', minute: '2-digit' };
-  return `${new Date(start).toLocaleTimeString([], options)} - 
-    ${new Date(end).toLocaleTimeString([], options)}`
+
+  if (end) {
+    timeString = `${new Date(start).toLocaleTimeString([], options)} - 
+      ${new Date(end).toLocaleTimeString([], options)}`
+  } else {
+    timeString = `${new Date(start).toLocaleTimeString([], options)}`
+  };
+
+  return timeString;
 };
 
 /**

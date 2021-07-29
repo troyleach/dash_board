@@ -1,0 +1,29 @@
+.score-board-wrapper {
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 3fr;
+  grid-gap: 1px;
+  background-color: #fff;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.score-board-box {
+  background-color: #f2f2f2;
+  color: #000;
+  /* background-color: #444; */
+  /* color: #fff; */
+  border-radius: 5px;
+  padding: 5px;
+  /* font-size: 150%; */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.h-8 {
+  text-align: right;
+}
+
+.d-4 {
+  text-align: left;
+}
