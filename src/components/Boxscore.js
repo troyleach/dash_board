@@ -3,17 +3,16 @@ import React, { Component } from 'react'
 import "./Boxscore.css";
 
 import ScoreBoard from './ScoreBoard';
-import { getNflScores } from '../services/api/scores'
+import { getSportScores } from '../services/api/scores';
 
 class Github extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: [],
-      date: '',
-      awayTeam: {},
-      homeTeam: {},
-      broadcasts: ''
+      nfl: [],
+      mlb: [],
+      nhl: [],
+      displayLeague: []
     }
   }
 
@@ -26,15 +25,25 @@ class Github extends Component {
     return {};
   }
 
+  setTab(type) {
+    this.setState({
+      displayLeague: this.state[type.toLowerCase()],
+    });
+  };
+
   displayCompetitors(data) {}
 
   async componentDidMount() {
     try {
-      // TODO: need to re-think this, this is ALL week 1 games for the nfl
-      const { data } = await getNflScores('nfl');
+      const nflData = await getSportScores('nfl');
+      const nhlData = await getSportScores('nhl');
+      const mlbData = await getSportScores('mlb');
 
       this.setState({
-        data
+        nfl: nflData.data,
+        mlb: mlbData.data,
+        nhl: nhlData.data,
+        displayLeague: nflData.data,
       });
 
     } catch (error) {
@@ -45,11 +54,21 @@ class Github extends Component {
 
   render() {
     // TODO: make a function - getLogo(false)
-    // const { title } = this.props;
+    const types = ['NFL', 'NHL', 'MLB'];
+
     return (
       <>
+        <div className="score-board-menu-wrapper">
+          <ul id="navbar">
+            {types.map(type => (
+              <li className='league-type'
+                  onClick={() => this.setTab(type)}>{type}</li>
+            ))}
+          </ul>
+        </div>
+
         <div className="boxScore-container">
-          {this.state.data.map((event) => {
+          {this.state.displayLeague.map((event) => {
             const homeTeam = this.getTeamByValue(event.competitors, 'home');
             const awayTeam = this.getTeamByValue(event.competitors, 'away');
             return (

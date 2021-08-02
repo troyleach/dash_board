@@ -6,13 +6,6 @@ import { formateUTCDateString, formateTime } from '../utils/dateHelpers';
 
 
 class ScoreBoard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
-  async componentDidMount() { };
-
   render() {
     const {
       awayTeam,

@@ -1,10 +1,12 @@
 import axios from "axios";
-
 const base_url = process.env.REACT_APP_BASE_URL_THE_RAILS_API;
-const AUTH_HEADER = '';
 
-export const getNflScores = (params) => {
-  // const url = `${base_url}${params.league}`
+export const getSportScores = (params) => {
+  // FIXME: change this, the api should gather all the scores and send them all back then this service can pick what it wants
+  const AUTH_HEADER = {
+        'x-league': params
+      };
+
   const url = `${base_url}scores`
 
   return axios.get(
@@ -12,5 +14,5 @@ export const getNflScores = (params) => {
     {
       headers: AUTH_HEADER
     }
-  )
-}
+  );
+};
