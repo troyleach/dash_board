@@ -19,18 +19,20 @@ class ScoreBoard extends Component {
         <div key={keyId} className="score-board-wrapper">
           <div className="score-board-box a-1">
             <img className='team-logo' src={awayTeam.logo} alt="team logo" />
+            <p className='score-board-record'>{awayTeam.records}</p>
           </div>
-          <div className="score-board-box b-2">
+          <div className="score-board-box a-2">
             <p className='score-board-text'>AT</p>
           </div>
-          <div className="score-board-box c-3">
+          <div className="score-board-box a-3">
             <img className='team-logo' src={homeTeam.logo} alt="team logo" />
+            <p className='score-board-record'>{homeTeam.records}</p>
           </div>
-          <div className="score-board-box d-4">{formateTime(eventDate)}</div>
-          <div className="score-board-box e-5">{awayTeam.records}</div>
-          <div className="score-board-box f-6"></div>
-          <div className="score-board-box g-7">{homeTeam.records}</div>
-          <div className="score-board-box h-8">{broadcasts}</div>
+          <div className="score-board-box a-4">
+            <p className='score-board-record'>{formateTime(eventDate)}</p>
+            <hr />
+            <p className='score-board-record'>{broadcasts}</p>
+          </div>
         </div>
       </>
     )

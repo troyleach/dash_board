@@ -1,7 +1,7 @@
 .score-board-wrapper {
   /* border: 1px solid red; */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 3fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1px;
   background-color: #fff;
   color: #444;
@@ -11,19 +11,18 @@
 .score-board-box {
   background-color: #f2f2f2;
   color: #000;
-  /* background-color: #444; */
-  /* color: #fff; */
   border-radius: 5px;
-  padding: 5px;
-  /* font-size: 150%; */
+  padding: 2.5px;
   text-align: center;
   vertical-align: middle;
 }
 
-.h-8 {
-  text-align: right;
+.score-board-record {
+  padding: 0;
+  margin: 0;
 }
 
-.d-4 {
-  text-align: left;
+.score-board-text {
+  text-align: center;
+  vertical-align: middle;
 }
