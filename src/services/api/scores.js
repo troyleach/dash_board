@@ -7,7 +7,7 @@ export const getSportScores = (params) => {
         'x-league': params
       };
 
-  const url = `${base_url}scores`
+  const url = `${base_url}sports/scores`
 
   return axios.get(
     url,
