@@ -1,3 +1,4 @@
+
 // Everything dates live here
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -37,6 +38,27 @@ export function formateDate(date) {
 
 /**
  *
+ * @params {String} - "2021-08-12"
+ * @return {String} - "Thursday, February 18, 2021, 08:06:20 PM"
+ *
+ */
+// return iso string from 
+export function displayShortDateString(args) {
+  const options = {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  const date = new Date(args);
+  const displayDate = date.toLocaleDateString('en-US', options);
+
+  console.log('ZZZ', displayDate)
+  return displayDate
+};
+
+/**
+ *
  * @params {String} - "2021-02-19T02:06:20Z"
  * @return {String} - "Thu, February 18, 2021, 08:06:20 PM"
  *
@@ -71,9 +93,17 @@ export function formateUTCDateString(dateString) {
  *
  */
 export function formateTime(start, end) {
+  let timeString;
   const options = { hour: '2-digit', minute: '2-digit' };
-  return `${new Date(start).toLocaleTimeString([], options)} - 
-    ${new Date(end).toLocaleTimeString([], options)}`
+
+  if (end) {
+    timeString = `${new Date(start).toLocaleTimeString([], options)} - 
+      ${new Date(end).toLocaleTimeString([], options)}`
+  } else {
+    timeString = `${new Date(start).toLocaleTimeString([], options)}`
+  };
+
+  return timeString;
 };
 
 /**
