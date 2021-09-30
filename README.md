@@ -81,6 +81,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 To deploy the news
 bash deployNews.sh
 
+To deploy the app:
+git push heroku master
+
 
 ### `yarn build` fails to minify
 
