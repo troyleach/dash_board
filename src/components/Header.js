@@ -40,7 +40,10 @@ function Header(props) {
       <div className="column right-column">
         <Clock 
           region='America/Chicago'
-          flag='chi'/>
+          flag='mn'/>
+        {/* <Clock */} 
+        {/*   region='America/Chicago' */}
+        {/*   flag='chi'/> */}
         <Clock 
           region='US/Eastern'
           flag='fl'/>

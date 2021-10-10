@@ -84,6 +84,16 @@
   margin-right: 0.5rem;
 }
 
+.mn-flag {
+  border: var(--border);
+  height: 1.4rem;
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-right: 0.5rem;
+}
+
 time {
   color: green;
   margin-right: 1.5rem;
