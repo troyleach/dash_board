@@ -32,14 +32,34 @@ body {
   background: var(--content-background-color);
 }
 
-a {
-  color: #61dafb;
+a:link, a:visited,  a:hover, a:active
+{
+  color: var(--text);
   text-decoration: none;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.deleteTaskBtn {
+	position: relative;
+  top: 35%;
+	float: right;
+	color: red;
+	background: rgba(0,0,0,0);
+	font-size: 20px;
+	font-weight: bold;
+	border: 1px solid white;
+	border-radius: 50%;
+	padding: 10px 5px;
+	visibility: hidden;
+	opacity: 0;
+	line-height: 0;
+	margin-right: 5px;
+	margin-left: 10px;
+	cursor: default;
 }
 
 @media (prefers-reduced-motion: no-preference) {
