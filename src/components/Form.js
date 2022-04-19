@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Button from 'react-bootstrap/Button';
 import "./Form.css";
 
 class FormLinks extends React.Component {
@@ -23,7 +24,7 @@ class FormLinks extends React.Component {
   }
 
   handleSubmit(event) {
-    this.props.postLinks(this.state)
+    this.props.parentCallback(this.state)
     event.preventDefault();
   }
 
@@ -49,6 +50,7 @@ class FormLinks extends React.Component {
         </div>
         <div className='label-tag'>
           <input className='addBtn' type="submit" value="Add" />
+          <Button className='cancelBtn pull-right' onClick={this.props.onHide}>Cancel</Button>
         </div>
       </form>
     );

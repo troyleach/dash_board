@@ -62,6 +62,10 @@ a:link, a:visited,  a:hover, a:active
 	cursor: default;
 }
 
+.pull-right {
+  float: right;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

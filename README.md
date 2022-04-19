@@ -7,7 +7,8 @@ https://react-icons.github.io/react-icons
 ### HTML
 [If a grid is needed follow this pattern](https://gridbyexample.com/examples/)
 
-
+## Packages
+[React Bootstrap](https://react-bootstrap.github.io/getting-started/introduction/)
 ## third party API's
 ### Stocks
 [Alpha Vantage](https://www.alphavantage.co/documentation/)

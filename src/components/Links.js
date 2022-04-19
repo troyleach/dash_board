@@ -1,15 +1,13 @@
-// import React, { Component } from 'react'
-// import React, { useState, Component } from "react";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
-
 import { getLinks, postLink, deleteLink } from '../services/api/links'
+import { MyVerticallyCenteredModal } from "./Modal"
+
 import update from 'immutability-helper'
+import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
 
 import "./Links.css";
-import "./Modal";
-
-import Modal from './Modal';
 
 
 class Links extends Component {
@@ -17,28 +15,20 @@ class Links extends Component {
     super(props)
     this.state = {
       data: [],
-      isOpen: false
+      modalShow: false
     }
-    this.setIsOpen=this.setIsOpen.bind(this);
     this.postLinks=this.postLinks.bind(this);
   }
 
-  addNewLink() {
-    console.log('A model will pop up yo')
-  }
-
-  setIsOpen(bool) {
-    console.warn('setting the modal')
+  setModalShow(bool) {
     this.setState({
-      isOpen: bool
+      modalShow: bool
     });
   }
 
   async removeLink(link) {
     const { data } = this.state
     const id = link.id
-
-    console.log('delete this link', id, link.display_text)
 
     try {
       await deleteLink(id);
@@ -55,20 +45,21 @@ class Links extends Component {
     }
   }
 
-  // FIXME: async await this whole thing needs fixing lol
-  // FIXME: try catch yo
   async postLinks(args) {
-    console.warn('making the api call', args)
-    const result = await postLink(args)
-    console.warn('results', result)
-    if ( result ) {
-      const currentState = this.state.data;
-      currentState.push(result.data);
-      this.setState({
-        data: currentState
-      });
-    }
-    this.setIsOpen(false)
+    try {
+      const result = await postLink(args)
+      if ( result ) {
+        const currentState = this.state.data;
+        currentState.push(result.data);
+        this.setState({
+          data: currentState
+        });
+      }
+    } catch (error) {
+      console.error('ERROR', error)
+      alert(`something went wrong while creating: ${args.display_text}`, error);
+    };
+    this.setModalShow(false)
   }
 
   async componentDidMount() {
@@ -85,18 +76,21 @@ class Links extends Component {
   };
 
   render() {
-    // const [isopen, setisopen] = usestate(false);
-    const {isOpen} = this.state;
+    // TODO: investigate userState
     const links = this.state.data || [];
-
-    console.warn('LINKS => ', this.state.data)
+    const {modalShow} = this.state;
     return (
       <>
+        <div className="plus-icon" onClick={() => this.setModalShow(true)}>
+          <IoIosAddCircle size='1.2em'/>
+        </div>
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => this.setModalShow(false)}
+        parentCallback={this.postLinks}
+      />
         <div className="link-container">
-          <div className="plus-icon" onClick={() => this.setIsOpen(true)}>
-            <IoIosAddCircle size='1.2em'/>
-          </div>
-            {isOpen && <Modal hideBackdrop modalState={ isOpen } setIsOpen={this.setIsOpen}  postLinks={this.postLinks}/>}
             { links.map(link => {
               return (
                 <>
