@@ -1,0 +1,9 @@
+/* css for forms */
+.input-container {
+  padding: 5px;
+}
+
+.input-element {
+  width: 100%;
+  height: 100%;
+}

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Github from './Github';
 import Boxscore from './Boxscore';
 import News from './News';
+import Links from './Links';
 
 import "./Widget.css";
 
@@ -20,7 +21,8 @@ class Widget extends Component {
     const componentMapping = {
       Github,
       Boxscore,
-      News
+      News,
+      Links
     }
     const { type, title } = this.props
     const Component = componentMapping[type]

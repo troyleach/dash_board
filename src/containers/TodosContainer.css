@@ -92,25 +92,6 @@ input.taskCheckbox:checked + label.taskLabel {
 	overflow: auto;
 }
 
-.deleteTaskBtn {
-	position: relative;
-  top: 35%;
-	float: right;
-	color: red;
-	background: rgba(0,0,0,0);
-	font-size: 20px;
-	font-weight: bold;
-	border: 1px solid white;
-	border-radius: 50%;
-	padding: 10px 5px;
-	visibility: hidden;
-	opacity: 0;
-	line-height: 0;
-	margin-right: 5px;
-	margin-left: 10px;
-	cursor: default;
-}
-
 .taskP {
   text-align: justify !important;
 }

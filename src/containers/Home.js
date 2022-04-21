@@ -49,6 +49,11 @@ function Home(props) {
                 day={tomorrow}
                 when='tomorrow' />
             </div>
+            <div className="box b-c">
+              <Widget
+                type='Links'
+                title='Important Links' />
+            </div>
           </div>
         </div>
         <div className="box c">
