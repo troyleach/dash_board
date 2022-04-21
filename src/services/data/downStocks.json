@@ -1,14 +1,14 @@
-      {
-        "Global Quote": {
-          "01. symbol": "AMC",
-          "02. open": "9.4800",
-          "03. high": "10.1000",
-          "04. low": "6.0000",
-          "05. price": "7.8200",
-          "06. volume": "455959866",
-          "07. latest trading day": "2021-02-02",
-          "08. previous close": "13.3000",
-          "09. change": "-5.4800",
-          "10. change percent": "-41.2030%"
-        }
-      }
+{
+  "Global Quote": {
+    "01. symbol": "AMC",
+    "02. open": "9.4800",
+    "03. high": "10.1000",
+    "04. low": "6.0000",
+    "05. price": "7.8200",
+    "06. volume": "455959866",
+    "07. latest trading day": "2021-02-02",
+    "08. previous close": "13.3000",
+    "09. change": "-5.4800",
+    "10. change percent": "-41.2030%"
+  }
+}
