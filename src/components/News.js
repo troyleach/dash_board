@@ -6,6 +6,8 @@ import { getNews } from '../services/api/news';
 
 import "./News.css";
 
+const show_news_feature = process.env.REACT_APP_NEWS;
+
 class News extends Component {
   constructor(props) {
     super(props)
@@ -62,7 +64,7 @@ class News extends Component {
       <>
         <div className="news-container">
           <div className="news-wrapper">
-            {this.newsWidget(news)}
+            {show_news_feature && this.newsWidget(news) }
             {/* <div class="news-box a-1">A</div>
             <div class="news-box b-1">B</div>
             <div class="news-box c-1">C</div>

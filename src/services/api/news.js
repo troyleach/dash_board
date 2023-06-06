@@ -7,6 +7,7 @@ const AUTH_HEADER = '';
 
 export const getNews = (params) => {
   const url = `${base_url}top-headlines?country=${params.country}&apiKey=${key}`;
+  console.log('Logging URL', url)
 
   return axios.get(
     url,
