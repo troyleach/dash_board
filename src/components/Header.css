@@ -27,7 +27,6 @@
 .stocks-container ul li {
   display: inline-block;
   border: 1px solid cyan;
-  width: 18%;
   margin: 0.2em;
   padding: 2px;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { formateUTCDateString } from '../utils/dateHelpers';
 
 import mockNewsData from '../services/data/news.json';
+import { getNews } from '../services/api/news';
 
 import "./News.css";
 
@@ -38,7 +39,13 @@ class News extends Component {
     let news;
 
     try {
-      news = mockNewsData["articles"].slice(0, size);
+      // news = mockNewsData["articles"].slice(0, size);
+      const params = {
+        country: 'us'
+      }
+      const results = await getNews(params);
+      news = results.data.articles
+      console.log('NEWS', news)
     } catch (error) {
       // FIXME: Look at the error sheet and code per the errors
       console.error('Something went wrong with your news', error)
